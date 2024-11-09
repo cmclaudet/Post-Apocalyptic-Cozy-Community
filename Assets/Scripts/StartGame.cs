@@ -16,6 +16,6 @@ public class StartGame : MonoBehaviour
 
     private void StartDialogue(string dialogueName)
     {
-        GameManager.Instance.StartDialogue(dialogueName);
+        CampManager.Instance.StartDialogue(dialogueName);
     }
 }

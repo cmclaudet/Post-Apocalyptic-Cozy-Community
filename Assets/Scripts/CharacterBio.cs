@@ -8,6 +8,7 @@ public class CharacterBio : ScriptableObject
     public CharacterTrait[] Traits;
     public CharacterSkills[] Skills;
     public Relationship[] Relationships;
+    public Sprite ProfilePic;
 }
 
 public enum CharacterTrait

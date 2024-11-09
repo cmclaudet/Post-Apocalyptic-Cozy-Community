@@ -10,6 +10,10 @@ public class UiCharacterBio : MonoBehaviour
     public TextMeshProUGUI RelationshipNames;
     public TextMeshProUGUI RelationshipValues;
 
+    public GameObject LanceBio;
+    public GameObject StellaBio;
+    public GameObject AbuelaBio;
+
     private void Start()
     {
         gameObject.SetActive(false);
@@ -17,39 +21,58 @@ public class UiCharacterBio : MonoBehaviour
 
     public void SetCharacter(CharacterBio characterBio)
     {
-        Name.text = characterBio.Name;
-        var traits = "";
-        var skills = "";
-        foreach (var trait in characterBio.Traits)
+        if (characterBio.Name == "Lance")
         {
-            traits += trait + "\n";
+            LanceBio.SetActive(true);
+            StellaBio.SetActive(false);
+            AbuelaBio.SetActive(false);
         }
-        foreach (var skill in characterBio.Skills)
+        else if (characterBio.Name == "Stella")
         {
-            skills += skill + "\n";
+            StellaBio.SetActive(true);
+            AbuelaBio.SetActive(false);
+            LanceBio.SetActive(false);
         }
-
-        Traits.text = traits;
-        Skills.text = skills;
-        
-        var characterBios = GameManager.Instance.CharacterBios;
-        string relationshipNames = "";
-        string relationshipValues = "";
-        foreach (var character in characterBios)
+        else if (characterBio.Name == "Abuela")
         {
-            if (character.Name == characterBio.Name)
-            {
-                continue;
-            }
-            
-            if (characterBio.Relationships.Select(r => r.CharacterName).Contains(character.Name))
-            {
-                relationshipNames += character.Name + "\n";
-                relationshipValues += characterBio.Relationships.First(r => r.CharacterName == character.Name).Value + "\n";
-            }
+            AbuelaBio.SetActive(true);
+            StellaBio.SetActive(false);
+            LanceBio.SetActive(false);
         }
         
-        RelationshipNames.text = relationshipNames;
-        RelationshipValues.text = relationshipValues;
+        // Name.text = characterBio.Name;
+        // var traits = "";
+        // var skills = "";
+        // foreach (var trait in characterBio.Traits)
+        // {
+        //     traits += trait + "\n";
+        // }
+        // foreach (var skill in characterBio.Skills)
+        // {
+        //     skills += skill + "\n";
+        // }
+        //
+        // Traits.text = traits;
+        // Skills.text = skills;
+        //
+        // var characterBios = GameManager.Instance.CharacterBios;
+        // string relationshipNames = "";
+        // string relationshipValues = "";
+        // foreach (var character in characterBios)
+        // {
+        //     if (character.Name == characterBio.Name)
+        //     {
+        //         continue;
+        //     }
+        //     
+        //     if (characterBio.Relationships.Select(r => r.CharacterName).Contains(character.Name))
+        //     {
+        //         relationshipNames += character.Name + "\n";
+        //         relationshipValues += characterBio.Relationships.First(r => r.CharacterName == character.Name).Value + "\n";
+        //     }
+        // }
+        //
+        // RelationshipNames.text = relationshipNames;
+        // RelationshipValues.text = relationshipValues;
     }
 }

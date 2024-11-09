@@ -286,6 +286,9 @@ MonoBehaviour:
   Skills: {fileID: 1376868901125120459}
   RelationshipNames: {fileID: 7175789351191106971}
   RelationshipValues: {fileID: 2541293967015821358}
+  LanceBio: {fileID: 5118915898053513056}
+  StellaBio: {fileID: 7381284570691155317}
+  AbuelaBio: {fileID: 6318559596187815944}
 --- !u!1 &3494114940915906345
 GameObject:
   m_ObjectHideFlags: 0

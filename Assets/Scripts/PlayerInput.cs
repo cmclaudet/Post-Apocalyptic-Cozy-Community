@@ -17,8 +17,8 @@ public class PlayerInput
     {
         if (currentController == InputController.World)
         {
-            GameManager.Instance.UiCharacterBio.SetCharacter(characterBio);
-            GameManager.Instance.UiCharacterBio.gameObject.SetActive(true);
+            CampManager.Instance.UiCharacterBio.SetCharacter(characterBio);
+            CampManager.Instance.UiCharacterBio.gameObject.SetActive(true);
         }
     }
 }
