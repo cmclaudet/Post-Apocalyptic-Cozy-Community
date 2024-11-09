@@ -1,11 +1,265 @@
 ﻿title: Start
 ---
-Wow!
-My first ever Yarn script in Unity!
+The end of the world was rather unspectacular. 
 
--> Gosh!
--> Incredible!
--> I'm amazed!
+It started slowly - temperature and sea levels rising, but we had it under control. It wasn‘t that bad - longer summers, colder winters - we got used to it, some even enjoyed it.
 
-Anyway, time to get writing!
+Natural disasters started occuring more frequently, but there was time to rebuild, recover, get back to normal. 
+
+Until there wasn‘t.
+
+Hurricanes, blizzards, earthquakes – everything happened everywhere at at once. In some places, the air became unbreathable. 
+
+We jumped into action then, tried to clean up what we could, protect ourselves. But it was too late. 
+
+The moment even the last deniers realized we wouldn't return to normal was when the billionaires disappeared. But we had other things to worry about by then. 
+
+And so we huddled together in shelters, bunkers and caves, waiting for the disaster to pass or to die.
+
+So this is how it went down. Not with a bang, but a whimper. 
+
+But this is not the story of how everything ended.
+
+It‘s the story of what we did after.
+<<jump Welcome>>
 ===
+
+title: Welcome
+---
+NOW
+
+It‘s been a while since the last storm had passed. Food has been getting sparse, and our shelters can no longer provide us with everything we needed. 
+
+So one by one, we've started to go out into the world - to explore, to survive, find a new place to call home. 
+
+We found an abandoned village, nestled in a valley, with clean air and a source of water. 
+
+Of course, a place like this is bound to attract all kinds of people.
+
+That's how we met.
+
+<<jump IntroLance>>
+
+===
+
+title: IntroLance
+---
+Lance: Um, hello there. I wasn‘t expecting to meet anyone else here. I‘m Lance.
+Lance: I'm an accountant. Well, I used to be. Now… I suppose I don't know what I am now.
+
+<<jump IntroAbuela>>
+
+===
+
+title: IntroAbuela
+---
+Abuela: Encantado! I am Maria, but call me abuela.
+Abuela: I used to have a big family. Always someone running around, so much noise! It used to drive me crazy.
+Abuela: Now, I miss them.
+
+<<jump IntroStella>>
+===
+
+title: IntroStella
+---
+
+Stella: Namaste. My name is Stella, like the star. 
+Stella: I'm a bit of a free spirit. I've always let the Universe guide me to where I need to go.
+
+<<jump Mission1>>
+
+===
+
+title: Mission1
+---
+
+Lance: This seems like a nice enough place to stay.
+Stella: Yes! I love the energy here. 
+Abuela: But there's nowhere to sleep! We have to set up a shelter.
+Lance: We don't have enough building material for that. 
+Lance: We'll need at least some wood to set up something rudimentary.
+Stella: I sense the presence of a forest nearby. I can go gather some.
+Abuela: All by yourself? That's dangerous, mija!
+Lance: Let's send two people to look for wood. The remaining person can watch the campfire.
+
+
+===
+
+title: StellaLance_Mission1
+---
+SCENE - FOREST
+
+Lance: We actually reached a forest!
+Stella: You sound surprised. Didn't I tell you it was here?
+Lence: Well, you said you "sensed the forest's presence." Pardon me if I don't view that as the most reliable form of directions.
+Stella: You should have a little more trust, Lance. 
+Stella: Mother Nature speaks to us. She can guide us wherever we need to go.
+Lance: Well, Mother Nature also obliberated Birmingham, so I might have some trust issues there.
+Lance: Anyway, back to the task at hand. We need some sturdy wood.
+Lance: If we had an axe, we could just cut it from the trees. But without tools, we'll have to look for big fallen branches.
+Stella: This is the perfect opportunity to open your mind. Let Mother Nature guide us to find wood.
+Lance: Or we could just look for it on the ground, like normal people.
+
+->Let Mother Nature guide us
+    <<jump StellaLance_Mission1Success>>
+->Look for wood on the ground
+    <<jump StellaLance_Mission1Fail>>
+
+===
+
+title: StellaLance_Mission1Success
+---
+Lance: All right, let's do it your way. Bring it on, Mother Nature.
+Stella: Close your eyes and listen to her voice.
+Lance: Hmm. I do feel a strange urge to turn this way…
+Stella: Look! Over there – those branches are usable, right?
+Lance: They're perfect! 
+Lance: I hate to admit it, but it seems Mother Nature has led us to success.
+
+SCENE CHANGE - CAMP
+
+Abuela: Welcome back! Did you find any wood?
+Stella: Of course. There's nothing you can't achieve with an open mind and spirit.
+Lance: I would argue with that, but we're doing things Stella's way today.
+Abuela: How nice. Now that we have the wood, let's set up the shelter!
+
+<<jump Mission2>>
+
+===
+
+title: StellaLance_Mission1Fail
+---
+Lance: There are plenty of branches over here.
+Stella: Hmm, they look quite brittle to me.
+Lance: No, they're – 
+Lance: Good grief, you're right. These branches are unusable.
+Stella: It's getting late. We should head back to camp.
+Lance: And return empty-handed?
+Stella: What choice do we have?
+
+SCENE CHANGE - CAMP
+
+Abuela: Welcome back! Did you find any wood?
+Lance: Don't ask.
+Stella: We would have been fine, if Lance had been open to Mother Nature's voice.
+Lance: As if you were so useful back there!
+Abuela: Don't fight. We'll just have to try again.
+Abuela: But maybe we should try a different combination of people this time…
+
+===
+
+title: StellaAbuela_Mission1
+---
+
+SCENE - FOREST
+
+Stella: Here we are in the forest, just like I sensed.
+Abuela: Impressive, mija. You are well-attuned to nature.
+Stella: I just listen to Mother Nature's voice.
+Stella: And look, there are some sturdy branches! Let's collect them.
+Abuela: Not so many!
+Abuela: Women shouldn't carry so much. We are too delicate.
+Stella: That's a limiting belief, abuela. I am a lot stronger than you think.
+Stella: And we'll need a lot of wood if we want to construct a decent shelter.
+
+-> Take as much wood as we can carry
+    <<jump StellaAbuela_Mission1Success>>
+-> Take just a little 
+    <<jump StellaAbuela_Mission1Fail>>
+
+===
+
+title: StellaAbuela_Mission1Success
+---
+
+Abuela: Oh, who am I to tell you what to do.
+Stella: Don't worry, you don't have to carry more than a couple of branches.
+Stella: I'll take the rest.
+
+SCENE CHANGE - CAMP
+
+Lance: Welcome back! How did it go?
+Abuela: Look at all the wood we gathered! Stella carried most of it.
+Stella: Thanks… I - need a rest now.
+Lance: Well done. This is perfect building material.
+Lance: Once you recovered, let's set up the shelter!
+
+===
+
+title: StellaAbuela_Mission1Fail
+---
+
+Stella: Well, I guess we shouldn't take too much from the forest.
+Abuela: Very prudent, my child.
+
+SCENE CHANGE - CAMP
+
+Lance: Welcome back! How did it go?
+Abuela: We found some wood. Here.
+Lance: Oh… That's not a lot. We'll need much more to construct a shelter.
+Stella: See? I told you, abuela.
+Lance: Looks like we'll just have to go on another trip to the forest.
+Lance: But maybe we should try a different combination of people this time…
+
+===
+
+
+title: AbuelaLance_Mission1
+---
+
+SCENE - ROAD
+
+Abuela: Which way could this forest be?
+Lance: We don't even know that there is one. Stella only said she "sensed" one.
+Abuela: This is a rural area. Walk long enough, and we'll have to find a forest eventually.
+Abuela: I think I hear birdsong from the left path. Let's go this way.
+Lance: I don't know. My gut is telling me to go right.
+
+
+-> Go left
+    <<jump AbuelaLance_Mission1Success>>
+-> Go right
+    <<jump AbuelaLance_Mission1Fail>>
+
+===
+
+title: AbuelaLance_Mission1Success
+---
+
+SCENE CHANGE - FOREST
+
+Abuela: We found it! The birds are never wrong.
+Lance: Well done, abuela. I'm glad we followed your keen ears.
+Lance: There's lots of sturdy branches around. Let's gather them and return to the camp.
+
+SCENE CHANGE - CAMP
+
+Stella: Welcome back! Did you find the forest?
+Abuela: Yes, mija. We just had to follow the sound of the birds.
+Stella: How wonderful! They are Mother Nature's minstrels.
+Lance: Err, sure. More importantly, though, we gathered all the wood that we need.
+Lance: Let's set up the shelter!
+
+===
+
+title: AbuelaLance_Mission1Fail
+---
+
+Abuela: We've been walking along this road for quite a while. 
+Lance: I'm sure we'll hit the forest soon.
+Abuela: Really? Because I think we've seen that rock over there before.
+Abuela: Are we walking in circles?
+Lance: What? No! Um … maybe.
+Abuela: We should go back to the camp. Stella will know the way.
+Lance: You mean sense it? … Fine.
+
+SCENE CHANGE - CAMP
+
+Stella: Welcome back! Did you find the forest?
+Abuela: No, mija. We just walked in circles.
+Lance: I'm still not convinced the forest exists.
+Stella: Oh, it does. I hear it calling us.
+Stella: We can try again. But this time, maybe I should come with you…
+
+===
+
