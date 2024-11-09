@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public CharacterBio characterBio;
+    
+    void OnMouseDown()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameManager.Instance.UiCharacterBio.SetCharacter(characterBio);
+        GameManager.Instance.UiCharacterBio.gameObject.SetActive(true);
     }
 }
