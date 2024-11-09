@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Yarn.Unity;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     public CharacterBio[] CharacterBios;
     public UiCharacterBio UiCharacterBio;
+    public PlayerInput PlayerInput;
+    public DialogueRunner DialogueRunner;
 
     void Awake()
     {
@@ -39,5 +43,18 @@ public class GameManager : MonoBehaviour
         }
 
         CharacterBios = Resources.LoadAll<CharacterBio>("Characters");
+        PlayerInput = new PlayerInput();
+    }
+    
+    public void StartDialogue(string dialogueName)
+    {
+        PlayerInput.SetController(InputController.Dialogue);
+        DialogueRunner.StartDialogue(dialogueName);
+        DialogueRunner.onDialogueComplete.AddListener(EndDialogue);
+    }
+
+    private void EndDialogue()
+    {
+        PlayerInput.SetController(InputController.World);
     }
 }

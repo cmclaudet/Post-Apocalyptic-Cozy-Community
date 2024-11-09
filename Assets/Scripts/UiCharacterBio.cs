@@ -52,10 +52,4 @@ public class UiCharacterBio : MonoBehaviour
         RelationshipNames.text = relationshipNames;
         RelationshipValues.text = relationshipValues;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
