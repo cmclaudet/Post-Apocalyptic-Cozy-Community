@@ -1,18 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class CharacterBio : MonoBehaviour
+[CreateAssetMenu(fileName = "Character", menuName = "ScriptableObjects/CharacterBio")]
+public class CharacterBio : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string Name;
+    public CharacterTrait[] Traits;
+    public CharacterSkills[] Skills;
+    public Relationship[] Relationships;
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public enum CharacterTrait
+{
+    Patient,
+    Sociable,
+    Curious,
+    Brave,
+    Loyal,
+    Honest,
+}
+
+public enum CharacterSkills
+{
+    Lumberjack,
+    Cooking,
+    Math,
+    Planning
+}
+
+[Serializable]
+public class Relationship
+{
+    public string CharacterName;
+    public RelationshipValue Value;
+}
+
+public enum RelationshipValue
+{
+    Neutral,
+    Like,
+    Dislike
 }
