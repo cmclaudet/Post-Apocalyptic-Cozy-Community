@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class ExplorerGridClicker : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class ExplorerGridClicker : MonoBehaviour
     private ExplorerTileInfo tileInfoHold;
 
     public GameObject[] heroPrefabs;
+
+    public Image overlayImage; // Reference to an UI Image (should cover entire screen)
+    public Color morningColor = new Color(1f, 1f, 0.7f, 0.2f); // Light yellowish morning
+    public Color middayColor = new Color(1f, 1f, 1f, 0f); // Fully transparent for midday
+    public Color eveningColor = new Color(0.8f, 0.5f, 0.3f, 0.3f); // Orange tint for evening
+    public Color nightColor = new Color(0f, 0f, 0.2f, 0.5f); // Dark blue tint for night
 
     private GameObject activeTile;
     private Vector3 activeTileWorldDestibation;
@@ -28,39 +35,45 @@ public class ExplorerGridClicker : MonoBehaviour
         grid = GetComponent<Grid>();
         tilemap = GetComponentInChildren<Tilemap>();
 
-        StartCoroutine(WalkToDestination());
-    }
-
-    IEnumerator WalkToDestination()
-    {
-        for (; ; )
-        {
-            yield return null;
-            if (activeTile != null)
-            {
-                date = date.AddSeconds(Time.deltaTime * DateTimeScale);
-                var oldPosition = activeTile.transform.position;
-                var dir = activeTileWorldDestibation - activeTile.transform.position;
-                //if(dir.magnitude)
-                activeTile.transform.position += Time.deltaTime * dir.normalized * WalkingSpeed(date);
-
-                var A = activeTileWorldDestibation - oldPosition;
-                var B = activeTileWorldDestibation - activeTile.transform.position;
-                bool overshoot = Vector3.Dot(A, B) <= 0;
-                if (overshoot)
-                {
-                    activeTile.transform.position = activeTileWorldDestibation;
-                    activeTile = null;
-                }
-            }
-        }
+        overlayImage.enabled = true;
     }
 
     void Update()
     {
+
+        {
+            // Cycle through a 24-hour period
+            float hoursAsFloat = (float)date.TimeOfDay.TotalHours;
+            float cycleDuration = 24f; // 24 hours in seconds for demonstration
+            float timeOfDay = hoursAsFloat / cycleDuration;
+
+            // Smoothly interpolate colors based on time of day
+            if (timeOfDay < 0.25f) // Morning (6 AM to 12 PM)
+                overlayImage.color = Color.Lerp(nightColor, morningColor, timeOfDay / 0.25f);
+            else if (timeOfDay < 0.5f) // Midday (12 PM to 6 PM)
+                overlayImage.color = Color.Lerp(morningColor, middayColor, (timeOfDay - 0.25f) / 0.25f);
+            else if (timeOfDay < 0.75f) // Evening (6 PM to 12 AM)
+                overlayImage.color = Color.Lerp(middayColor, eveningColor, (timeOfDay - 0.5f) / 0.25f);
+            else // Night (12 AM to 6 AM)
+                overlayImage.color = Color.Lerp(eveningColor, nightColor, (timeOfDay - 0.75f) / 0.25f);
+        }
+
         if (activeTile != null)
         {
-            //activeTile.gameObject.transform.position = activeTileWorldDestibation;
+            date = date.AddSeconds(Time.deltaTime * DateTimeScale);
+
+            var oldPosition = activeTile.transform.position;
+            var dir = activeTileWorldDestibation - activeTile.transform.position;
+            activeTile.transform.position += Time.deltaTime * dir.normalized * WalkingSpeed(date);
+
+            var A = activeTileWorldDestibation - oldPosition;
+            var B = activeTileWorldDestibation - activeTile.transform.position;
+            bool overshoot = Vector3.Dot(A, B) <= 0;
+            if (overshoot)
+            {
+                activeTile.transform.position = activeTileWorldDestibation;
+                activeTile = null;
+            }
             return;
         }
 
