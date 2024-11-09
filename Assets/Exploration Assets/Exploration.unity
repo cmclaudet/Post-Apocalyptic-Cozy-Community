@@ -411,11 +411,19 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 018f904512252064bb33552dcc94c36f, type: 2}
   - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: a5d3e0a3ddb6f9f469639599d70c899f, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: 2930d1dd65c5fac4ab797ca79fb8867c, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 21300000, guid: 4561daabea86be449856bd8e3de6fd78, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 10
     m_Data:
@@ -576,6 +584,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec605f38047fa74b991e903ffc3b52b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DateTimeScale: 10000
+  heroPrefabs:
+  - {fileID: 1438396785263023900, guid: 3ea9a3887157ab545a30ada0f94e9d90, type: 3}
 --- !u!156049354 &1255212999
 Grid:
   m_ObjectHideFlags: 0
