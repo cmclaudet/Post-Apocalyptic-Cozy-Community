@@ -6,7 +6,6 @@ public class Character : MonoBehaviour
     
     void OnMouseDown()
     {
-        GameManager.Instance.UiCharacterBio.SetCharacter(characterBio);
-        GameManager.Instance.UiCharacterBio.gameObject.SetActive(true);
+        GameManager.Instance.PlayerInput.OnCharacterMouseDown(characterBio);
     }
 }

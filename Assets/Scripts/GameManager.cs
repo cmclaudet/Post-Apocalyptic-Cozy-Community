@@ -1,4 +1,5 @@
 using UnityEngine;
+using Yarn.Unity;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviour
 
     public CharacterBio[] CharacterBios;
     public UiCharacterBio UiCharacterBio;
+    public GameObject UiCamp;
+    public PlayerInput PlayerInput;
+    public DialogueRunner DialogueRunner;
+    public Mission[] Missions;
+    private int currentMissionIndex = 0;
 
     void Awake()
     {
@@ -39,5 +45,25 @@ public class GameManager : MonoBehaviour
         }
 
         CharacterBios = Resources.LoadAll<CharacterBio>("Characters");
+        PlayerInput = new PlayerInput();
+    }
+    
+    public void StartDialogue(string dialogueName)
+    {
+        UiCamp.SetActive(false);
+        PlayerInput.SetController(InputController.Dialogue);
+        DialogueRunner.StartDialogue(dialogueName);
+        DialogueRunner.onDialogueComplete.AddListener(EndDialogue);
+    }
+
+    public Mission GetCurrentMission()
+    {
+        return Missions[currentMissionIndex];
+    }
+
+    private void EndDialogue()
+    {
+        UiCamp.SetActive(true);
+        PlayerInput.SetController(InputController.World);
     }
 }
