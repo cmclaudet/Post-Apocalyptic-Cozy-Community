@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -80,8 +80,12 @@ public class ExplorerGridClicker : MonoBehaviour
         // Create a list to store tile GameObjects
         
         var destPositions = new System.Collections.Generic.List<Vector3Int>();
-        var heroPositions = new System.Collections.Generic.List<Vector3Int>();
+        //var heroPositions = new System.Collections.Generic.List<Vector3Int>();
         var homePositions = new System.Collections.Generic.List<Vector3Int>();
+
+        Vector3Int abuelaTilePos = Vector3Int.zero;
+        Vector3Int lanceTilePos = Vector3Int.zero;
+        Vector3Int stellaTilePos = Vector3Int.zero;
 
         // Iterate through each cell in the Tilemap bounds
         foreach (Vector3Int pos in bounds.allPositionsWithin)
@@ -101,15 +105,19 @@ public class ExplorerGridClicker : MonoBehaviour
                 }
                 else
                 {
-                    heroPositions.Add(pos);
+                    if (tile.name.ToLower().StartsWith("abuela"))
+                        abuelaTilePos = pos;
+                    else if (tile.name.ToLower().StartsWith("lance"))
+                        lanceTilePos = pos;
+                    else if (tile.name.ToLower().StartsWith("stella"))
+                        stellaTilePos = pos;
                 }
             }
         }
 
         destinationTilePositions = destPositions.ToArray();
         homeTilePositions = homePositions.ToArray();
-        //TODO: sort by name
-        heroTilePositions = heroPositions.ToArray();
+        heroTilePositions = new Vector3Int[] { abuelaTilePos, lanceTilePos, stellaTilePos };
     }
 
     private void Start()
@@ -180,6 +188,7 @@ public class ExplorerGridClicker : MonoBehaviour
                 else
                 {
                     state = GameState.ReachedHome;
+                    SceneManager.LoadScene("Camp");
                 }
             }
             return;
@@ -231,9 +240,28 @@ public class ExplorerGridClicker : MonoBehaviour
 
                 ShuffleArray(destinationTilePositions);
 
+                //Get selected characters
+                List<int> characterIndice = new List<int>();
+
+                foreach (var character in ExplorationManager.Instance.SelectedCharacters)
+                {
+                    switch (character.Name)
+                    {
+                        case CharacterNames.Abuela:
+                            characterIndice.Add(0);
+                            break;
+                        case CharacterNames.Lance:
+                            characterIndice.Add(1);
+                            break;
+                        case CharacterNames.Stella:
+                            characterIndice.Add(2);
+                            break;
+                    }
+                }
+
                 List<Vector3> destinations = new List<Vector3>();
                 List<GameObject> gameObjects = new List<GameObject>();
-                for (int i = 0; i != 2; ++i)
+                foreach(int i in characterIndice)
                 {
                     //var activeTile = activeTiles[i];
                     var activeDestination = destinationTilePositions[i];
