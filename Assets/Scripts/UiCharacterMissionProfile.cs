@@ -30,7 +30,6 @@ public class UiCharacterMissionProfile : MonoBehaviour
 
     public void SetSelected(bool isSelected)
     {
-        SelectedImage.gameObject.SetActive(isSelected);
         if (isSelected)
         {
             SetLocked(false);

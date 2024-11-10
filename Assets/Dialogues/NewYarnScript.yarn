@@ -106,12 +106,12 @@ Lance: Or we could just look for it on the ground, like normal people.
 
 title: StellaLance_Mission1Success
 ---
-Lance: All right, let's do it your way. Bring it on, Mother Nature.
+Lance: All right, let's do it your way. Lead the way, Mother Nature.
 Stella: Close your eyes and listen to her voice.
-Lance: Hmm. I do feel a strange urge to turn this way…
+Lance: Hmm. I do feel a strange urge to turn left…
 Stella: Look! Over there – those branches are usable, right?
 Lance: They're perfect! 
-Lance: I hate to admit it, but it seems Mother Nature has led us to success.
+Lance: Would you look at that. Mother Nature has led us to success.
 
 <<setWinMission 1>>
 ===
@@ -122,8 +122,8 @@ SCENE - CAMP
 
 Abuela: Welcome back! Did you find any wood?
 Stella: Of course. There's nothing you can't achieve with an open mind and spirit.
-Lance: I would argue with that, but we're doing things Stella's way today.
-Abuela: How nice. I made some soup for everyone. After we've eaten, we can set up the shelter!
+Lance: I would argue with that, but doing things Stella's way worked out surprisingly well.
+Abuela: How nice. I made soup for everyone. After we've eaten, we can set up the shelter!
 
 
 ===
@@ -133,10 +133,10 @@ title: StellaLance_Mission1Fail
 Lance: There are plenty of branches over here.
 Stella: Hmm, they look quite brittle to me.
 Lance: No, they're – 
-Lance: Good grief, you're right. These branches are unusable.
+Lance: Good grief, you're right. These branches break if you look at them sternly.
 Stella: It's getting late. We should head back to camp.
 Lance: And return empty-handed?
-Stella: What choice do we have?
+Stella: What other choice do we have?
 
 <<setLoseMission 1>>
 ===
@@ -147,10 +147,10 @@ SCENE CHANGE - CAMP
 
 Abuela: Welcome back! Did you find any wood?
 Lance: Don't ask.
-Stella: We would have been fine, if Lance had been open to Mother Nature's voice.
-Lance: It's not my fault there weren't any decent branches in that damn forest!
+Stella: We would have been fine, if Lance had listened to Mother Nature's voice.
+Lance: Well, you should have sensed a better forest then!
 Abuela: Don't fight. We'll just have to try again.
-Abuela: But maybe we should try a different combination of people this time…
+Abuela: But maybe another pair can go this time.
 
 ===
 
@@ -163,12 +163,12 @@ Stella: Here we are in the forest, just like I sensed.
 Abuela: Impressive, mija. You are well-attuned to nature.
 Stella: I just listen to Mother Nature's voice.
 Stella: And look, there are some sturdy branches! Let's collect them.
-Abuela: Not so many!
-Abuela: Women shouldn't carry so much. We are too delicate.
-Stella: That's a limiting belief, abuela. I am a lot stronger than you think.
+Abuela: Ah, don't take that many, mija!
+Abuela: Women shouldn't carry so much. We are far too delicate.
+Stella: That's quite a limiting belief, abuela. Women are a lot stronger than that.
 Stella: And we'll need a lot of wood if we want to construct a decent shelter.
 
--> Take as much wood as we can carry
+-> Take as much wood as Stella can carry
     <<jump StellaAbuela_Mission1Success>>
 -> Take just a little 
     <<jump StellaAbuela_Mission1Fail>>
@@ -199,7 +199,7 @@ title: StellaAbuela_Mission1Fail
 ---
 
 Stella: Well, I guess we shouldn't take too much from the forest.
-Abuela: Very prudent, mija. Let's head back.
+Abuela: Very wise, mija. Let's head back.
 
 <<setLoseMission 1>>
 ===
@@ -210,7 +210,7 @@ SCENE CHANGE - CAMP
 
 Lance: Welcome back! How did it go?
 Abuela: We found some wood. Here.
-Lance: Oh… That's not a lot. We'll need much more to construct a shelter.
+Lance: Oh… That's not a lot. We'll need a lot more to construct a shelter.
 Stella: See? I told you, abuela.
 Lance: Looks like we'll just have to go on another trip to the forest.
 Lance: But maybe we should try a different combination of people this time…
@@ -225,9 +225,9 @@ SCENE - ROAD
 
 Abuela: Which way could this forest be?
 Lance: We don't even know that there is one. Stella only said she "sensed" one.
-Abuela: This is a rural area. Walk long enough, and we'll have to find a forest eventually.
+Abuela: This is a rural area. We'll have to find a forest eventually.
 Abuela: I think I hear birdsong from the left path. Let's go this way.
-Lance: I don't know. My gut is telling me to go right.
+Lance: I don't know. The path to the right looks a bit more well-trodden. 
 
 
 -> Go left
@@ -315,7 +315,6 @@ Stella: ...
 Stella: Very well. Hand me that rope.
 
 <<setWinMission 2>>
-<<jump Mission2Success>>
 ===
 
 
@@ -333,7 +332,6 @@ Lance: Good to know. Let's get back to building the shelter, shall we?
 
 
 <<setWinMission 2>>
-<<jump Mission2Success>>
 ===
 
 
