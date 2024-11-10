@@ -299,7 +299,7 @@ Stella: We can try again. But this time, maybe I should come with you…
 
 ===
 
-title: Mission2Intro>>
+title: Mission2Intro
 ---
 
 Abuela: How do we build a shelter? I've never constructed anything in my life.
@@ -323,6 +323,7 @@ title: StellaLance_Mission2
 
 
 <<setWinMission 2>>
+<<jump Mission2Sucess>>
 ===
 
 
@@ -345,5 +346,9 @@ title: StellaAbuela_Mission2
 
 <<setLoseMission 2>>
 ===
+
+
+title: Mission2Sucess
+---
 
 
