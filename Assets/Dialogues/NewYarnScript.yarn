@@ -115,16 +115,21 @@ Lance: Hmm. I do feel a strange urge to turn this way…
 Stella: Look! Over there – those branches are usable, right?
 Lance: They're perfect! 
 Lance: I hate to admit it, but it seems Mother Nature has led us to success.
-<<setWinMission 1>>
 
-SCENE CHANGE - CAMP
+<<setWinMission 1>>
+<<jump StellaLance_Mission1SuccessCamp>>
+===
+
+title: StellaLance_Mission1SuccessCamp
+---
+SCENE - CAMP
 
 Abuela: Welcome back! Did you find any wood?
 Stella: Of course. There's nothing you can't achieve with an open mind and spirit.
 Lance: I would argue with that, but we're doing things Stella's way today.
-Abuela: How nice. Now that we have the wood, let's set up the shelter!
+Abuela: How nice. I made some soup for everyone. After we've eaten, we can set up the shelter!
 
-<<jump Mission2>>
+<<jump Mission2Intro>>
 
 ===
 
@@ -137,14 +142,19 @@ Lance: Good grief, you're right. These branches are unusable.
 Stella: It's getting late. We should head back to camp.
 Lance: And return empty-handed?
 Stella: What choice do we have?
-<<setLoseMission 1>>
 
+<<setLoseMission 1>>
+<<jump StellaLance_Mission1FailCamp>>
+===
+
+title: StellaLance_Mission1FailCamp
+---
 SCENE CHANGE - CAMP
 
 Abuela: Welcome back! Did you find any wood?
 Lance: Don't ask.
 Stella: We would have been fine, if Lance had been open to Mother Nature's voice.
-Lance: As if you were so useful back there!
+Lance: It's not my fault there weren't any decent branches in that damn forest!
 Abuela: Don't fight. We'll just have to try again.
 Abuela: But maybe we should try a different combination of people this time…
 
@@ -178,24 +188,33 @@ Abuela: Oh, who am I to tell you what to do.
 Stella: Don't worry, you don't have to carry more than a couple of branches.
 Stella: I'll take the rest.
 <<setWinMission 1>>
+<<jump StellaAbuela_Mission1SuccessCamp>>
+===
 
+title: StellaAbuela_Mission1SuccessCamp
+---
 SCENE CHANGE - CAMP
 
 Lance: Welcome back! How did it go?
 Abuela: Look at all the wood we gathered! Stella carried most of it.
 Stella: Thanks… I - need a rest now.
 Lance: Well done. This is perfect building material.
-Lance: Once you recovered, let's set up the shelter!
-
+Lance: I made some sandwiches. Once we've eaten, let's set up the shelter!
+<<jump Mission2Intro>>
 ===
 
 title: StellaAbuela_Mission1Fail
 ---
 
 Stella: Well, I guess we shouldn't take too much from the forest.
-Abuela: Very prudent, my child.
-<<setLoseMission 1>>
+Abuela: Very prudent, mija. Let's head back.
 
+<<setLoseMission 1>>
+<<jump StellaAbuela_Mission1FailCamp>>
+===
+
+title: StellaAbuela_Mission1FailCamp
+---
 SCENE CHANGE - CAMP
 
 Lance: Welcome back! How did it go?
@@ -235,15 +254,22 @@ SCENE CHANGE - FOREST
 Abuela: We found it! The birds are never wrong.
 Lance: Well done, abuela. I'm glad we followed your keen ears.
 Lance: There's lots of sturdy branches around. Let's gather them and return to the camp.
-<<setWinMission 1>>
 
-SCENE CHANGE - CAMP
+<<setWinMission 1>>
+<<jump buelaLance_Mission1SuccessCamp>>
+===
+
+title: AbuelaLance_Mission1SuccessCamp
+---
+SCENE - CAMP
 
 Stella: Welcome back! Did you find the forest?
 Abuela: Yes, mija. We just had to follow the sound of the birds.
 Stella: How wonderful! They are Mother Nature's minstrels.
 Lance: Err, sure. More importantly, though, we gathered all the wood that we need.
-Lance: Let's set up the shelter!
+Stella: Wonderful. I made seed porridge while you were gone. After we've eaten, we can set up the shelter!
+
+<<jump Mission2Intro>>
 
 ===
 
@@ -258,7 +284,11 @@ Lance: What? No! Um … maybe.
 Abuela: We should go back to the camp. Stella will know the way.
 Lance: You mean sense it? … Fine.
 <<setLoseMission 1>>
+<<jump AbuelaLance_Mission1FailCamp>>
+===
 
+title: AbuelaLance_Mission1FailCamp
+---
 SCENE CHANGE - CAMP
 
 Stella: Welcome back! Did you find the forest?
@@ -268,4 +298,52 @@ Stella: Oh, it does. I hear it calling us.
 Stella: We can try again. But this time, maybe I should come with you…
 
 ===
+
+title: Mission2Intro>>
+---
+
+Abuela: How do we build a shelter? I've never constructed anything in my life.
+Stella: Oh, it can't be that hard. We just tie some of the branches together, and maybe cover them with clay?
+Stella: Is there any horse manure? I volunteered on a farm once where we made clay with--
+Lance: Um, that won't be necessary.
+Lance: I actually know a thing or two about carpentry.
+Abuela: Oh, que suerte! How did you learn that?
+Lance: My ex-husband and I bought a house. It was a bit of a fixer-upper.
+Lance: We poured our heart and soul into renovating it. It turned out quite nice, if I do say so myself.
+Lance: Of course, there's not much left of it now, I assume.
+Stella: Well then, let's set up this shelter!
+Abuela: We're almost out of food, though. One of us should collect some roots and berries, or we'll go hungry tomorrow.
+
+===
+
+title: StellaLance_Mission2
+---
+
+
+
+
+<<setWinMission 2>>
+===
+
+
+
+title: AbuelaLance_Mission2
+---
+
+
+
+
+<<setWinMission 2>>
+===
+
+
+title: StellaAbuela_Mission2
+---
+
+
+
+
+<<setLoseMission 2>>
+===
+
 
