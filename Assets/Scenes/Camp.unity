@@ -1502,7 +1502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartDialogueName: Start
-  SkipFirstDialogue: 1
+  SkipFirstDialogue: 0
 --- !u!4 &1629759473
 Transform:
   m_ObjectHideFlags: 0
