@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: lance
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: a7476e3e083e5b04c8042c9beda3c1b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea32ffbab323f0e45b2104337e071cde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

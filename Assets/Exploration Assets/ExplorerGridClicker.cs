@@ -14,7 +14,6 @@ public class ExplorerGridClicker : MonoBehaviour
     private Tilemap tilemap;
     private ExplorerTileInfo tileInfoHold;
 
-    public GameObject[] heroPrefabs;
 
     public Image overlayImage; // Reference to an UI Image (should cover entire screen)
     public Color morningColor = new Color(1f, 1f, 0.7f, 0.2f); // Light yellowish morning
@@ -22,9 +21,28 @@ public class ExplorerGridClicker : MonoBehaviour
     public Color eveningColor = new Color(0.8f, 0.5f, 0.3f, 0.3f); // Orange tint for evening
     public Color nightColor = new Color(0f, 0f, 0.2f, 0.5f); // Dark blue tint for night
 
-    private GameObject activeTile;
-    private Vector3 activeTileWorldDestibation;
+    public GameObject heroPrefab;
+    private Vector3Int[] destinationTilePositions = new Vector3Int[] { };
+    private Vector3Int[] homeTilePositions = new Vector3Int[] { };
+    private Vector3Int[] heroTilePositions = new Vector3Int[] { };
+    private GameObject[] activeTiles = new GameObject[] { };
+    private Vector3[] activeTilesWorldDestibations = new Vector3[] { };
     private GUIStyle dateTimeStyle;
+
+
+    public static void ShuffleArray<T>(T[] array)
+    {
+        var rng = new System.Random();
+        int n = array.Length;
+        for (int i = n - 1; i > 0; i--)
+        {
+            int j = rng.Next(i + 1);
+            // Swap elements
+            T temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
 
     void Awake()
     {
@@ -38,9 +56,47 @@ public class ExplorerGridClicker : MonoBehaviour
         overlayImage.enabled = true;
     }
 
+    void Start()
+    {
+        // Get the bounds of the Tilemap
+        BoundsInt bounds = tilemap.cellBounds;
+        // Create a list to store tile GameObjects
+        
+        var destPositions = new System.Collections.Generic.List<Vector3Int>();
+        var heroPositions = new System.Collections.Generic.List<Vector3Int>();
+        var homePositions = new System.Collections.Generic.List<Vector3Int>();
+
+        // Iterate through each cell in the Tilemap bounds
+        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        {
+            // Get the tile at the current position
+            TileBase tileBase = tilemap.GetTile(pos);
+            Tile tile = tileBase as Tile;
+            if (tile != null)
+            {
+                if (tile.name == "arrowUp")
+                {
+                    destPositions.Add(pos);
+                }
+                else if (tile.name == "home")
+                {
+                    homePositions.Add(pos);
+                }
+                else
+                {
+                    heroPositions.Add(pos);
+                }
+            }
+        }
+
+        destinationTilePositions = destPositions.ToArray();
+        homeTilePositions = homePositions.ToArray();
+        //TODO: sort by name
+        heroTilePositions = heroPositions.ToArray();
+    }
+
     void Update()
     {
-
         {
             // Cycle through a 24-hour period
             float hoursAsFloat = (float)date.TimeOfDay.TotalHours;
@@ -58,21 +114,26 @@ public class ExplorerGridClicker : MonoBehaviour
                 overlayImage.color = Color.Lerp(eveningColor, nightColor, (timeOfDay - 0.75f) / 0.25f);
         }
 
-        if (activeTile != null)
+        if (activeTiles.Length != 0)
         {
             date = date.AddSeconds(Time.deltaTime * DateTimeScale);
 
-            var oldPosition = activeTile.transform.position;
-            var dir = activeTileWorldDestibation - activeTile.transform.position;
-            activeTile.transform.position += Time.deltaTime * dir.normalized * WalkingSpeed(date);
-
-            var A = activeTileWorldDestibation - oldPosition;
-            var B = activeTileWorldDestibation - activeTile.transform.position;
-            bool overshoot = Vector3.Dot(A, B) <= 0;
-            if (overshoot)
+            for (int i = 0; i != activeTiles.Length; ++i)
             {
-                activeTile.transform.position = activeTileWorldDestibation;
-                activeTile = null;
+                var activeTile = activeTiles[i];
+                var activeTileWorldDestibation = activeTilesWorldDestibations[i];
+
+                var oldPosition = activeTile.transform.position;
+                var dir = activeTileWorldDestibation - activeTile.transform.position;
+                activeTile.transform.position += Time.deltaTime * dir.normalized * WalkingSpeed(date);
+
+                var A = activeTileWorldDestibation - oldPosition;
+                var B = activeTileWorldDestibation - activeTile.transform.position;
+                bool overshoot = Vector3.Dot(A, B) <= 0;
+                if (overshoot)
+                {
+                    activeTile.transform.position = activeTileWorldDestibation;
+                }
             }
             return;
         }
@@ -99,14 +160,45 @@ public class ExplorerGridClicker : MonoBehaviour
         {
             if (tileInfoHold?.clickedTile != null)
             {
+
                 ExplorerTileInfo info = GetTileInfoAtMouse();
-                if (info.clickedTile != null)
+
+                bool fromHeroToForest = tileInfoHold.IsHero&& info.IsForest;
+                bool fromForestToHero = tileInfoHold.IsForest&& info.IsHero;
+                bool fromHeroToHome   = tileInfoHold.IsHero&& info.IsHome;
+
+                if (fromHeroToForest)
                 {
-                    Debug.Log($"Dragged from {tileInfoHold.clickedTile.name} to {info.clickedTile.name}");
-                    activeTile = GameObject.Instantiate(heroPrefabs[0]);
-                    Vector3Int cellPosition = tileInfoHold.cellPosition;
-                    activeTile.gameObject.transform.position = GetMidpointForCell(cellPosition);
-                    activeTileWorldDestibation = GetMidpointForCell(info.cellPosition);
+                    ShuffleArray(destinationTilePositions);
+
+                    List<Vector3> destinations = new List<Vector3>();
+                    List<GameObject> gameObjects = new List<GameObject>();
+                    for (int i = 0; i != 2; ++i)
+                    {
+                        //var activeTile = activeTiles[i];
+                        var activeDestination = destinationTilePositions[i];
+
+                        Debug.Log($"Dragged from {tileInfoHold.clickedTile.name} to {info.clickedTile.name}");
+                        var activeTile = GameObject.Instantiate(heroPrefab);
+                        var spriteRenderer = activeTile.GetComponent<SpriteRenderer>();
+                        {
+                            //Tile tile = (Tile)tileInfoHold.clickedTile;
+                            Tile tile = (Tile)tilemap.GetTile(heroTilePositions[i]);
+                            spriteRenderer.sprite = tile.sprite;
+                            var newTile = ScriptableObject.Instantiate((Tile)tilemap.GetTile(homeTilePositions[0]));
+                            newTile.sprite = ((Tile)tilemap.GetTile(homeTilePositions[0])).sprite;
+                            tilemap.SetTile(heroTilePositions[i], newTile);
+                        }
+
+                        Vector3Int cellPosition = tileInfoHold.cellPosition;
+                        activeTile.gameObject.transform.position = GetMidpointForCell(cellPosition);
+                        //activeTile.gameObject.transform.position = grid.CellToWorld(cellPosition);
+                        //activeTileWorldDestibation = GetMidpointForCell(info.cellPosition);
+                        destinations.Add(GetMidpointForCell(activeDestination));
+                        gameObjects.Add(activeTile);
+                    }
+                    activeTilesWorldDestibations = destinations.ToArray();
+                    activeTiles = gameObjects.ToArray();
                 }
             }
             tileInfoHold = null;
