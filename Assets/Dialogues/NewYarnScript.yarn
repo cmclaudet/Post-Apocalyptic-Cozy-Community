@@ -32,7 +32,7 @@ It‘s been a while since the last storm had passed. Food has been getting spars
 
 So one by one, we've started to go out into the world - to explore, to survive, find a new place to call home. 
 
-We found an abandoned village, nestled in a valley, with clean air and a source of water. 
+We wandered until we found a small valley with clean air and a source of water. 
 
 Of course, a place like this is bound to attract all kinds of people.
 
@@ -303,23 +303,45 @@ title: Mission2Intro
 ---
 
 Abuela: How do we build a shelter? I've never constructed anything in my life.
-Stella: Oh, it can't be that hard. We just tie some of the branches together, and maybe cover them with clay?
-Stella: Is there any horse manure? I volunteered on a farm once where we made clay with--
-Lance: Um, that won't be necessary.
-Lance: I actually know a thing or two about carpentry.
-Abuela: Oh, que suerte! How did you learn that?
+Stella: Oh, how hard can it be?
+Lance: Err, it's not quite that easy.
+Lance: But luckily, I know a thing or two about carpentry.
+Abuela: Oh, que suerte! I though you were an accountant. Where did you learn that?
 Lance: My ex-husband and I bought a house. It was a bit of a fixer-upper.
-Lance: We poured our heart and soul into renovating it. It turned out quite nice, if I do say so myself.
-Lance: Of course, there's not much left of it now, I assume.
+Lance: We poured our heart and soul into the renovation. It turned out quite nice, if I do say so myself.
+Lance: Of course, there's not much left of it now.
 Stella: Well then, let's set up this shelter!
-Abuela: We're almost out of food, though. One of us should collect some roots and berries, or we'll go hungry tomorrow.
+Abuela: We're almost out of food, though. One of us should look for nuts and mushrooms, or we'll go hungry tomorrow.
 
 ===
 
 title: StellaLance_Mission2
 ---
 
+Lance: All right, first thing we need to do is tie these branches together in a V shape.
+Stella: Can't we just cover the branches with clay?
+Stella: I once volunteered on a farm where we made clay with horse manure and-
+Lance: Stella, I appreciate your… creative approach to problem solving.
+Lance: But this will go a lot faster if you just trust me here.
+Stella: ...
+Stella: Very well. Hand me that rope.
 
+<<setWinMission 2>>
+<<jump Mission2Success>>
+===
+
+
+title: AbuelaLance_Mission2
+---
+
+Abuela: I'm not sure I will be much help in this. I'm not very strong.
+Lance: Don't worry. If you just hand me that rope, and we'll tie the branches together like so.
+Abuela: Amazing! I'm learning so much today.
+Abuela: You remind me of my nephew, Diego. He's talented with these things, too. He once built me a rocking chair ...
+Abuela: He also likes los hombres. And did I mention he's very handsome?
+Lance: Abuela, are you trying to set me up with your nephew?
+Abuela: Mijo. All I'm saying is that if Diego ever finds his way to our camp, you two will get along very well.
+Lance: Good to know. Let's get back to building the shelter, shall we?
 
 
 <<setWinMission 2>>
@@ -327,29 +349,29 @@ title: StellaLance_Mission2
 ===
 
 
-
-title: AbuelaLance_Mission2
----
-
-
-
-
-<<setWinMission 2>>
-===
-
-
 title: StellaAbuela_Mission2
 ---
 
-
-
+Abuela: I don't know if it was a good idea to do this without Lance.
+Abuela: He seemed to know what he's talking about.
+Stella: I'm sure we can figure it out without him.
+Stella: Maybe we can the branches stick together with clay?
+Stella: I once volunteered on a farm where we made clay with horse manure.
+Abuela: No caballos here, mija.
+Stella: Well, we can just mix some soil with water to make mud.
+Abuela: If you think so ...
+Stella: Oh no! This isn't sticking a all.
+Abuela: All we've made is a mess.
+Abuela: Let's start again. But this time, we should really ask Lance to help.
 
 <<setLoseMission 2>>
 ===
 
 
+
 title: Mission2Success
 ---
+
 
 
 ===
