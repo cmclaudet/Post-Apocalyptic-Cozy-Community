@@ -323,7 +323,7 @@ title: StellaLance_Mission2
 
 
 <<setWinMission 2>>
-<<jump Mission2Sucess>>
+<<jump Mission2Success>>
 ===
 
 
@@ -348,7 +348,8 @@ title: StellaAbuela_Mission2
 ===
 
 
-title: Mission2Sucess
+title: Mission2Success
 ---
 
 
+===
