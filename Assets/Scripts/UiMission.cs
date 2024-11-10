@@ -7,7 +7,16 @@ using UnityEngine.UI;
 public class UiMission : MonoBehaviour
 {
     private const int CharactersToSelect = 2;
-    public UiCharacterMissionProfile[] CharacterMissionProfiles;
+
+    public UiCharacterMissionProfile[] CharacterMissionProfiles => new[]
+    {
+        AbuelaCharacterMissionProfile,
+        StellaCharacterMissionProfile,
+        LanceCharacterMissionProfile
+    };
+    public UiCharacterMissionProfile AbuelaCharacterMissionProfile;
+    public UiCharacterMissionProfile StellaCharacterMissionProfile;
+    public UiCharacterMissionProfile LanceCharacterMissionProfile;
     public TextMeshProUGUI SelectXMoreText;
     public TextMeshProUGUI MissionDescription;
     public Button StartMissionButton;
@@ -17,9 +26,18 @@ public class UiMission : MonoBehaviour
     void Start()
     {
         var characters = GameManager.Instance.CharacterBios;
-        for (int i = 0; i < characters.Length; i++)
+        foreach (var character in characters)
         {
-            InitProfile(CharacterMissionProfiles[i], characters[i]);
+            if (character.Name == CharacterNames.Abuela)
+            {
+                InitProfile(AbuelaCharacterMissionProfile, character);
+            } else if (character.Name == CharacterNames.Stella)
+            {
+                InitProfile(StellaCharacterMissionProfile, character);
+            } else if (character.Name == CharacterNames.Lance)
+            {
+                InitProfile(LanceCharacterMissionProfile, character);
+            }
         }
         
         SetMissionDescription();

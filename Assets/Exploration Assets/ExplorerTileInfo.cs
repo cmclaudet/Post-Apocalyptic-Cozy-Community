@@ -14,6 +14,6 @@ class ExplorerTileInfo
     {
         Tile tile = clickedTile as Tile;
         if (tile == null) return false;
-        return tile.name == name;
+        return tile.name.StartsWith( name);
     }
 }

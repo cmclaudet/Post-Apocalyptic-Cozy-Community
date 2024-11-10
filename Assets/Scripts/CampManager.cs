@@ -19,15 +19,38 @@ public class CampManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance.pendingMissionResult != null)
+        UiMissionResult.gameObject.SetActive(false);
+        if (GameManager.Instance.PendingMissionCompleteDialogue != "")
+        {
+            UiCamp.SetActive(false);
+            GameManager.Instance.StartDialogue(GameManager.Instance.PendingMissionCompleteDialogue, DialogueRunner, ShowMissionResult);
+        } else if (GameManager.Instance.pendingMissionResult != null)
+        {
+            UiCamp.SetActive(false);
+            ShowMissionResult();
+        }
+    }
+
+    private void ShowMissionResult()
+    {
+        if (GameManager.Instance.pendingMissionResult.Success)
         {
             UiMissionResult.gameObject.SetActive(true);
             UiMissionResult.SetUp(GameManager.Instance.pendingMissionResult.Success);
             GameManager.Instance.ClearPendingMissionResult();
         }
-        else
+        else 
         {
             UiMissionResult.gameObject.SetActive(false);
+        }
+    }
+
+    public void TryStartNextMissionDialogue()
+    {
+        var mission = GameManager.Instance.GetCurrentMission();
+        if (mission == Mission.SetUpShelter)
+        {
+            StartDialogue("Mission2Intro");
         }
     }
 
