@@ -67,7 +67,7 @@ public class ExplorerGridClicker : MonoBehaviour
         overlayImage.enabled = true;
     }
 
-    void Start()
+    void FindAllTiles()
     {
         // Get the bounds of the Tilemap
         BoundsInt bounds = tilemap.cellBounds;
@@ -85,11 +85,11 @@ public class ExplorerGridClicker : MonoBehaviour
             Tile tile = tileBase as Tile;
             if (tile != null)
             {
-                if (tile.name == "arrowUp")
+                if (tile.name.StartsWith("arrowUp"))
                 {
                     destPositions.Add(pos);
                 }
-                else if (tile.name == "home")
+                else if (tile.name.StartsWith("home"))
                 {
                     homePositions.Add(pos);
                 }
@@ -104,6 +104,11 @@ public class ExplorerGridClicker : MonoBehaviour
         homeTilePositions = homePositions.ToArray();
         //TODO: sort by name
         heroTilePositions = heroPositions.ToArray();
+    }
+
+    private void Start()
+    {
+        FindAllTiles();
     }
 
     void Update()
@@ -125,7 +130,7 @@ public class ExplorerGridClicker : MonoBehaviour
                 overlayImage.color = Color.Lerp(eveningColor, nightColor, (timeOfDay - 0.75f) / 0.25f);
         }
 
-        if (state == GameState.OnTheWayToDestination)
+        if (state == GameState.OnTheWayToDestination || state == GameState.OnTheWayHome)
         {
             date = date.AddSeconds(Time.deltaTime * DateTimeScale);
 
@@ -185,6 +190,7 @@ public class ExplorerGridClicker : MonoBehaviour
 
                 bool fromHeroToForest = tileInfoHold.IsHero&& info.IsForest;
                 bool fromForestToHero = tileInfoHold.IsForest&& info.IsHero;
+                bool fromForestToHome = tileInfoHold.IsForest&& info.IsHome;
                 bool fromHeroToHome   = tileInfoHold.IsHero&& info.IsHome;
 
                 if (fromHeroToForest && state == GameState.Init)
@@ -222,6 +228,43 @@ public class ExplorerGridClicker : MonoBehaviour
                     activeTilesWorldDestibations = destinations.ToArray();
                     activeTiles = gameObjects.ToArray();
                 }
+                if (fromForestToHome && state == GameState.ReachedDestination)
+                {
+                    state = GameState.OnTheWayHome;
+
+                    FindAllTiles();
+                    ShuffleArray(homeTilePositions);
+
+                    List<GameObject> gameObjects = new List<GameObject>();
+                    for (int i = 0; i != 2; ++i)
+                    {
+                        //var activeTile = activeTiles[i];
+                        var activeDestination = homeTilePositions[i];
+
+                        Debug.Log($"Dragged from {tileInfoHold.clickedTile.name} to {info.clickedTile.name}");
+                        /*
+                        var activeTile = activeTiles[i];
+                        var spriteRenderer = activeTile.GetComponent<SpriteRenderer>();
+                        {
+                            //Tile tile = (Tile)tileInfoHold.clickedTile;
+                            Tile tile = (Tile)tilemap.GetTile(heroTilePositions[i]);
+                            spriteRenderer.sprite = tile.sprite;
+                            var newTile = ScriptableObject.Instantiate((Tile)tilemap.GetTile(homeTilePositions[0]));
+                            newTile.sprite = ((Tile)tilemap.GetTile(homeTilePositions[0])).sprite;
+                            tilemap.SetTile(heroTilePositions[i], newTile);
+                        }
+
+                        Vector3Int cellPosition = tileInfoHold.cellPosition;
+                        activeTile.gameObject.transform.position = GetMidpointForCell(cellPosition);
+                        //activeTile.gameObject.transform.position = grid.CellToWorld(cellPosition);
+                        //activeTileWorldDestibation = GetMidpointForCell(info.cellPosition);
+                        destinations.Add(GetMidpointForCell(activeDestination));
+                        gameObjects.Add(activeTile);
+                        */
+                        activeTilesWorldDestibations[i] = activeDestination;
+                    }
+                }
+
             }
             tileInfoHold = null;
         }
