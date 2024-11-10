@@ -37,6 +37,8 @@ public class ExplorerGridClicker : MonoBehaviour
     public GameObject heroPrefab;
     public GameObject missionUI;
 
+    public TMPro.TMP_Text txtTimeOfDay;
+
     private Vector3Int[] destinationTilePositions = new Vector3Int[] { };
     private Vector3Int[] homeTilePositions = new Vector3Int[] { };
     private Vector3Int[] heroTilePositions = new Vector3Int[] { };
@@ -127,6 +129,9 @@ public class ExplorerGridClicker : MonoBehaviour
 
     void Update()
     {
+        string dateTimeString = $"({GetTimeOfDayLabel(date)}) {date:yyyy MMMM} {GetDayWithSuffix(date.Day)} {date:HH:mm}";
+        txtTimeOfDay.text = dateTimeString;
+
         if (state != GameState.OnTheWayHome && state != GameState.OnTheWayToDestination)
         {
             overlayImage.gameObject.SetActive(false);
@@ -409,13 +414,5 @@ public class ExplorerGridClicker : MonoBehaviour
             >= 5 and < 12 => Mathf.Lerp(0f, 1f, (hour - 5) / 7f), // Morning (Increasing speed)
             _ => Mathf.Lerp(1f, 0f, (hour - 14) / 8f) // Afternoon/Evening (Decreasing speed)
         };
-    }
-
-    public void OnGUI()
-    {
-        string dateTimeString = $"({GetTimeOfDayLabel(date)}) {date:yyyy MMMM} {GetDayWithSuffix(date.Day)} {date:HH:mm}";
-
-        GUI.Label(new Rect(10, 10, 300, 50),  dateTimeString, dateTimeStyle);
-
     }
 }
