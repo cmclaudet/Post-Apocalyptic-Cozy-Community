@@ -121,13 +121,14 @@ public class GameManager : MonoBehaviour
         dialogueRunner.onDialogueComplete.AddListener(() =>
         {
             endDialogue.Invoke();
-            EndDialogue();
+            EndDialogue(dialogueRunner);
         });
     }
 
-    private void EndDialogue()
+    private void EndDialogue(DialogueRunner dialogueRunner)
     {
         Instance.PlayerInput.SetController(InputController.World);
+        dialogueRunner.onDialogueComplete.RemoveAllListeners();
     }
 
     public void SetPendingDialogue(string completedMissionDialogue)
