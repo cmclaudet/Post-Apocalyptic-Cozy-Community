@@ -80,7 +80,10 @@ public class GameManager : MonoBehaviour
             Mission = (Mission) mission,
             Success = success
         };
-        currentMissionIndex++;
+        if (success)
+        {
+            currentMissionIndex++;
+        }
     }
     
     public void ClearPendingMissionResult()

@@ -50,7 +50,7 @@ public class CampManager : MonoBehaviour
 
     private void ShowMissionResult()
     {
-        if (GameManager.Instance.pendingMissionResult.Success)
+        if (GameManager.Instance.pendingMissionResult != null)
         {
             UiMissionResult.gameObject.SetActive(true);
             UiMissionResult.SetUp(GameManager.Instance.pendingMissionResult.Success);

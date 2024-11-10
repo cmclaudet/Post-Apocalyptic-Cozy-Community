@@ -219,11 +219,12 @@ public class ExplorerGridClicker : MonoBehaviour
                 ExplorerTileInfo info = GetTileInfoAtMouse();
 
                 bool fromHeroToForest = tileInfoHold.IsHero&& info.IsForest;
+                bool fromHeroToHome   = tileInfoHold.IsHero&& info.IsHome;
                 bool fromForestToHero = tileInfoHold.IsForest&& info.IsHero;
                 bool fromForestToHome = tileInfoHold.IsForest&& info.IsHome;
-                bool fromHeroToHome   = tileInfoHold.IsHero&& info.IsHome;
 
-                if (fromHeroToForest && state == GameState.Init)
+                if (fromHeroToForest && state == GameState.Init && GameManager.Instance.GetCurrentMission() == Mission.GatherWood 
+                 || fromHeroToHome && state == GameState.Init && GameManager.Instance.GetCurrentMission() == Mission.SetUpShelter)
                 {
                     state = GameState.MissionUIShown;
                     missionUI.SetActive(true);
@@ -239,6 +240,14 @@ public class ExplorerGridClicker : MonoBehaviour
                 state = GameState.OnTheWayToDestination;
 
                 ShuffleArray(destinationTilePositions);
+
+                if (GameManager.Instance.GetCurrentMission() == Mission.SetUpShelter)
+                {
+                    // HACK for second mission, just stay at the home base
+                    destinationTilePositions = new Vector3Int[] {
+                        new Vector3Int(-1, 0),new Vector3Int(0, 0),new Vector3Int(-1, 1),new Vector3Int(0, 1),
+                    };
+                }
 
                 //Get selected characters
                 List<int> characterIndice = new List<int>();
