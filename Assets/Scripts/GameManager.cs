@@ -37,10 +37,11 @@ public class GameManager : MonoBehaviour
     public PlayerInput PlayerInput;
     public Mission[] Missions;
     public PendingMissionResult pendingMissionResult { get; private set; }
-    
+    public string PendingMissionCompleteDialogue { get; private set; } = "";
+
     public bool HasFinishedOpeningDialogue {get; private set;} = false;
     private int currentMissionIndex = 0;
-    
+
     void Awake()
     {
         if (_instance == null)
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
     public void ClearPendingMissionResult()
     {
         pendingMissionResult = null;
+        PendingMissionCompleteDialogue = "";
     }
     //
     // public void LoadDialogueScene(string missionDialogue, Action onEnd, Sprite background = null)
@@ -126,5 +128,10 @@ public class GameManager : MonoBehaviour
     private void EndDialogue()
     {
         Instance.PlayerInput.SetController(InputController.World);
+    }
+
+    public void SetPendingDialogue(string completedMissionDialogue)
+    {
+        PendingMissionCompleteDialogue = completedMissionDialogue;
     }
 }
