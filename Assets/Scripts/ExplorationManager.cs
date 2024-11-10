@@ -32,14 +32,23 @@ public class ExplorationManager : MonoBehaviour
     
     private void SetLoseMission(int mission)
     {
+        var completedMissionDialogue = GetCompletedMissionDialogue(success: false);
+        if (mission == 1)
+        {
+            GameManager.Instance.SetPendingDialogue(completedMissionDialogue);
+        }
         GameManager.Instance.SetMissionResult(false, mission);
     }
 
     private void SetWinMission(int mission)
     {
+        var completedMissionDialogue = GetCompletedMissionDialogue(success: true);
+        if (mission == 1)
+        {
+            GameManager.Instance.SetPendingDialogue(completedMissionDialogue);
+        }
         GameManager.Instance.SetMissionResult(true, mission);
     }
-
 
     public void StartDialogue(string dialogueName, Action onEnd)
     {
@@ -53,7 +62,26 @@ public class ExplorationManager : MonoBehaviour
     
     public string GetMissionDialogue()
     {
+        var dialogueCharacterPrefix = GetMissionDialogueCharacterPrefix();
+        
         Mission currentMission = GameManager.Instance.GetCurrentMission();
+        var missionPostfix = (int)currentMission;
+
+        return $"{dialogueCharacterPrefix}_Mission{missionPostfix}";
+    }
+
+    private string GetCompletedMissionDialogue(bool success)
+    {
+        var dialogueCharacterPrefix = GetMissionDialogueCharacterPrefix();
+        Mission currentMission = GameManager.Instance.GetCurrentMission();
+        var missionPostfix = (int)currentMission;
+        var successPostfix = success ? "Success" : "Fail";
+
+        return $"{dialogueCharacterPrefix}_Mission{missionPostfix}{successPostfix}Camp";
+    }
+
+    private string GetMissionDialogueCharacterPrefix()
+    {
         var abuela = GameManager.Instance.CharacterBios.FirstOrDefault(c => c.Name == CharacterNames.Abuela);
         var lance = GameManager.Instance.CharacterBios.FirstOrDefault(c => c.Name == CharacterNames.Lance);
         var stella = GameManager.Instance.CharacterBios.FirstOrDefault(c => c.Name == CharacterNames.Stella);
@@ -73,8 +101,7 @@ public class ExplorationManager : MonoBehaviour
         {
             dialogueCharacterPrefix = stellaAbuelaCombo;
         }
-        var missionPostfix = (int)currentMission;
-        
-        return $"{dialogueCharacterPrefix}_Mission{missionPostfix}";
+
+        return dialogueCharacterPrefix;
     }
 }
