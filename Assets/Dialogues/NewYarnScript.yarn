@@ -15,7 +15,7 @@ That's how the three of us met.
 
 title: IntroLance
 ---
-Lance: Um, hello there. I wasn‘t expecting to meet anyone else here. I‘m Lance.
+Lance: Um, hello there. I wasn‘t expecting anyone else here. I‘m Lance.
 Lance: I'm an accountant. Well, I used to be. Now… I suppose I don't know what I am now.
 
 <<jump IntroAbuela>>
@@ -26,7 +26,7 @@ title: IntroAbuela
 ---
 Abuela: Encantado! I am Maria, but call me abuela.
 Abuela: I used to have a big family. Always someone running around, so much noise! It used to drive me crazy.
-Abuela: Now, I miss them a lot.
+Abuela: I hope they're doing all right, wherever they are.
 
 <<jump IntroStella>>
 ===
@@ -45,14 +45,13 @@ Stella: And now I am here.
 title: Mission1
 ---
 
-Lance: This seems like a rather nice little valley.
+Lance: This seems like a nice little valley.
 Stella: Yes! This place has a wonderful energy! I think we should stay here.
 Abuela: But there's nowhere to sleep! We have to set up a shelter.
-Lance: I'm onboard, but we'll need to find some wood to set up something rudimentary.
-Lance: There's not much here except for this single tree.
-Stella: I sense the presence of a forest nearby. I can go there to gather some.
+Lance: I'm onboard, but we'll need quite a bit of wood to set up something rudimentary.
+Stella: I sense the presence of a forest nearby. I can gather some there.
 Abuela: All by yourself? That's dangerous, mija!
-Lance: Let's send two people to find wood. The remaining person can watch the campfire.
+Lance: Let's send two people to the forest. The remaining person should watch the campfire.
 
 ===
 
