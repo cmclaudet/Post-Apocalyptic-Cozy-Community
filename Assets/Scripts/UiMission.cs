@@ -92,14 +92,19 @@ public class UiMission : MonoBehaviour
     
     private void StartMission()
     {
-        Debug.Log("Starting mission with characters");
+        // todo replace with making characters move to the forest
+
+        // once characters are done moving do this
         ExplorationManager.Instance.SetSelectedCharacters(SelectedCharacters.ToArray ());
         var missionDialogue = ExplorationManager.Instance.GetMissionDialogue();
-        GameManager.Instance.LoadDialogueScene(missionDialogue, OnEndMissionDialogue);
+        ExplorationManager.Instance.StartDialogue(missionDialogue, OnEndMissionDialogue);
     }
 
     private void OnEndMissionDialogue()
     {
+        // todo replace with making characters move back to camp
+        
+        // once characters are done moving do this
         SceneManager.LoadScene("Camp");
     }
 }

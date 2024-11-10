@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using UnityEngine;
+using Yarn.Unity;
 
 public class ExplorationManager : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class ExplorationManager : MonoBehaviour
     public static ExplorationManager Instance => _instance;
     
     public CharacterBio[] SelectedCharacters { get; private set; }
+    public DialogueRunner DialogueRunner;
 
     public bool TestMissionResult;
     
@@ -17,8 +20,32 @@ public class ExplorationManager : MonoBehaviour
         {
             GameManager.Instance.SetOpeningDialogueFinished();
         }
+        DialogueRunner.AddCommandHandler<int>(
+            "setWinMission",
+            SetWinMission
+        );
+        DialogueRunner.AddCommandHandler<int>(
+            "setLoseMission",
+            SetLoseMission
+        );
+    }
+    
+    private void SetLoseMission(int mission)
+    {
+        GameManager.Instance.SetMissionResult(false, mission);
     }
 
+    private void SetWinMission(int mission)
+    {
+        GameManager.Instance.SetMissionResult(true, mission);
+    }
+
+
+    public void StartDialogue(string dialogueName, Action onEnd)
+    {
+        GameManager.Instance.StartDialogue(dialogueName, DialogueRunner, onEnd);
+    }
+    
     public void SetSelectedCharacters(CharacterBio[] characterBio)
     {
         SelectedCharacters = characterBio;

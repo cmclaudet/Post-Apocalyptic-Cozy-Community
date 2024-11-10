@@ -86,31 +86,31 @@ public class GameManager : MonoBehaviour
     {
         pendingMissionResult = null;
     }
-
-    public void LoadDialogueScene(string missionDialogue, Action onEnd, Sprite background = null)
-    {
-        var sceneName = "DialogueScene";
-        SceneManager.LoadScene(sceneName);
-        StartCoroutine(WaitDialogueSceneLoad(sceneName, missionDialogue, onEnd, background));
-
-        var dialogueRunner = FindObjectOfType<DialogueRunner>();
-        StartDialogue(missionDialogue, dialogueRunner, onEnd);
-    }
-    
-    private IEnumerator WaitDialogueSceneLoad(string sceneName, string missionDialogue, Action onEnd, Sprite background)
-    {
-        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == sceneName);
-        var dialogueScene = FindObjectOfType<DialogueScene>();
-
-        if (dialogueScene != null)
-        {
-            dialogueScene.StartDialogue(missionDialogue, onEnd, background);
-        }
-        else
-        {
-            Debug.Log("No GameObject with MyComponent found in the scene.");
-        }
-    }
+    //
+    // public void LoadDialogueScene(string missionDialogue, Action onEnd, Sprite background = null)
+    // {
+    //     var sceneName = "DialogueScene";
+    //     SceneManager.LoadScene(sceneName);
+    //     StartCoroutine(WaitDialogueSceneLoad(sceneName, missionDialogue, onEnd, background));
+    //
+    //     var dialogueRunner = FindObjectOfType<DialogueRunner>();
+    //     StartDialogue(missionDialogue, dialogueRunner, onEnd);
+    // }
+    //
+    // private IEnumerator WaitDialogueSceneLoad(string sceneName, string missionDialogue, Action onEnd, Sprite background)
+    // {
+    //     yield return new WaitUntil(() => SceneManager.GetActiveScene().name == sceneName);
+    //     var dialogueScene = FindObjectOfType<DialogueScene>();
+    //
+    //     if (dialogueScene != null)
+    //     {
+    //         dialogueScene.StartDialogue(missionDialogue, onEnd, background);
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("No GameObject with MyComponent found in the scene.");
+    //     }
+    // }
     
     public void StartDialogue(string dialogueName, DialogueRunner dialogueRunner, Action endDialogue)
     {
