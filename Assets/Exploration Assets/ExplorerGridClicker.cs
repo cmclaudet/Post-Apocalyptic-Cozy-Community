@@ -6,6 +6,17 @@ using UnityEngine.UI;
 
 public class ExplorerGridClicker : MonoBehaviour
 {
+    enum GameState 
+    { 
+        Init = 0,
+        OnTheWayToDestination,
+        ReachedDestination,
+        OnTheWayHome,
+        ReachedHome
+    }
+
+    GameState state = GameState.Init;
+
     private System.DateTime date = new System.DateTime(2066, 6, 1, 12, 0, 0);
 
     public float DateTimeScale = 5000;
@@ -114,9 +125,11 @@ public class ExplorerGridClicker : MonoBehaviour
                 overlayImage.color = Color.Lerp(eveningColor, nightColor, (timeOfDay - 0.75f) / 0.25f);
         }
 
-        if (activeTiles.Length != 0)
+        if (state == GameState.OnTheWayToDestination)
         {
             date = date.AddSeconds(Time.deltaTime * DateTimeScale);
+
+            int heroReachedDestination = 0;
 
             for (int i = 0; i != activeTiles.Length; ++i)
             {
@@ -133,7 +146,14 @@ public class ExplorerGridClicker : MonoBehaviour
                 if (overshoot)
                 {
                     activeTile.transform.position = activeTileWorldDestibation;
+                    heroReachedDestination++;
                 }
+            }
+
+            if (heroReachedDestination == 2)
+            {
+                state = GameState.ReachedDestination;
+
             }
             return;
         }
@@ -167,8 +187,10 @@ public class ExplorerGridClicker : MonoBehaviour
                 bool fromForestToHero = tileInfoHold.IsForest&& info.IsHero;
                 bool fromHeroToHome   = tileInfoHold.IsHero&& info.IsHome;
 
-                if (fromHeroToForest)
+                if (fromHeroToForest && state == GameState.Init)
                 {
+                    state = GameState.OnTheWayToDestination;
+
                     ShuffleArray(destinationTilePositions);
 
                     List<Vector3> destinations = new List<Vector3>();
