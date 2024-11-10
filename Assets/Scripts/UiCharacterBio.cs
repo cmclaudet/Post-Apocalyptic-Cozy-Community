@@ -21,19 +21,19 @@ public class UiCharacterBio : MonoBehaviour
 
     public void SetCharacter(CharacterBio characterBio)
     {
-        if (characterBio.Name == "Lance")
+        if (characterBio.Name == CharacterNames.Lance)
         {
             LanceBio.SetActive(true);
             StellaBio.SetActive(false);
             AbuelaBio.SetActive(false);
         }
-        else if (characterBio.Name == "Stella")
+        else if (characterBio.Name == CharacterNames.Stella)
         {
             StellaBio.SetActive(true);
             AbuelaBio.SetActive(false);
             LanceBio.SetActive(false);
         }
-        else if (characterBio.Name == "Abuela")
+        else if (characterBio.Name == CharacterNames.Abuela)
         {
             AbuelaBio.SetActive(true);
             StellaBio.SetActive(false);

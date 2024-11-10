@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4010959af81394043bae57ae1e0baaaf, type: 3}
   m_Name: Stella
   m_EditorClassIdentifier: 
-  Name: Stella
+  Name: 1
   Traits: 0300000001000000
   Skills: 0000000003000000
+  Relationships: []
+  ProfilePic: {fileID: 21300000, guid: 85cfbbe2abae92a4a80302d074067287, type: 3}
+  SelectedPic: {fileID: 21300000, guid: 27d51fc400c97fa419dda478a65ed710, type: 3}
+  LockedPic: {fileID: 21300000, guid: 65217cf4e15ee7b458b3a8719b287823, type: 3}

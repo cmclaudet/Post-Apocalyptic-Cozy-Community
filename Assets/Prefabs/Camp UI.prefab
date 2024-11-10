@@ -541,3 +541,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoalText: {fileID: 8613806384108560034}
+  StartMissionButton: {fileID: 5030957662998143573}

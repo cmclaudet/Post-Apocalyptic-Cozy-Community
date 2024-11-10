@@ -115,6 +115,7 @@ Lance: Hmm. I do feel a strange urge to turn this way…
 Stella: Look! Over there – those branches are usable, right?
 Lance: They're perfect! 
 Lance: I hate to admit it, but it seems Mother Nature has led us to success.
+<<setWinMission 1>>
 
 SCENE CHANGE - CAMP
 
@@ -136,6 +137,7 @@ Lance: Good grief, you're right. These branches are unusable.
 Stella: It's getting late. We should head back to camp.
 Lance: And return empty-handed?
 Stella: What choice do we have?
+<<setLoseMission 1>>
 
 SCENE CHANGE - CAMP
 
@@ -175,6 +177,7 @@ title: StellaAbuela_Mission1Success
 Abuela: Oh, who am I to tell you what to do.
 Stella: Don't worry, you don't have to carry more than a couple of branches.
 Stella: I'll take the rest.
+<<setWinMission 1>>
 
 SCENE CHANGE - CAMP
 
@@ -191,6 +194,7 @@ title: StellaAbuela_Mission1Fail
 
 Stella: Well, I guess we shouldn't take too much from the forest.
 Abuela: Very prudent, my child.
+<<setLoseMission 1>>
 
 SCENE CHANGE - CAMP
 
@@ -231,6 +235,7 @@ SCENE CHANGE - FOREST
 Abuela: We found it! The birds are never wrong.
 Lance: Well done, abuela. I'm glad we followed your keen ears.
 Lance: There's lots of sturdy branches around. Let's gather them and return to the camp.
+<<setWinMission 1>>
 
 SCENE CHANGE - CAMP
 
@@ -252,6 +257,7 @@ Abuela: Are we walking in circles?
 Lance: What? No! Um … maybe.
 Abuela: We should go back to the camp. Stella will know the way.
 Lance: You mean sense it? … Fine.
+<<setLoseMission 1>>
 
 SCENE CHANGE - CAMP
 

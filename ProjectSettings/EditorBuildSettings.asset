@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Exploration Assets/Exploration.unity
     guid: 47d99f99643c8ad4c92f9279fdcb3c14
+  - enabled: 1
+    path: Assets/Scenes/DialogueScene.unity
+    guid: 87fcb5cdc21f645f3b0a4e6cb96441fb
   m_configObjects: {}

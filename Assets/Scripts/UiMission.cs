@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UiMission : MonoBehaviour
@@ -8,6 +9,7 @@ public class UiMission : MonoBehaviour
     private const int CharactersToSelect = 2;
     public UiCharacterMissionProfile[] CharacterMissionProfiles;
     public TextMeshProUGUI SelectXMoreText;
+    public TextMeshProUGUI MissionDescription;
     public Button StartMissionButton;
     
     List<CharacterBio> SelectedCharacters = new List<CharacterBio>();
@@ -20,14 +22,21 @@ public class UiMission : MonoBehaviour
             InitProfile(CharacterMissionProfiles[i], characters[i]);
         }
         
+        SetMissionDescription();
         UpdateSelectXMoreText();
         StartMissionButton.onClick.AddListener(StartMission);
     }
-    
+
     private void InitProfile(UiCharacterMissionProfile characterMissionProfile, CharacterBio characterBio)
     {
         characterMissionProfile.SetCharacter(characterBio);
         characterMissionProfile.SelectButton.onClick.AddListener(() => OnCharacterSelected(characterBio, characterMissionProfile));
+    }
+
+    private void SetMissionDescription()
+    {
+        var missionText = GameManager.Instance.GetCurrentMission().GetMissionGoal();
+        MissionDescription.text = missionText;
     }
 
     private void OnCharacterSelected(CharacterBio characterBio, UiCharacterMissionProfile characterMissionProfile)
@@ -49,19 +58,18 @@ public class UiMission : MonoBehaviour
 
     private void UpdateCharacterSelection()
     {
-        if (SelectedCharacters.Count == CharactersToSelect)
+        foreach (var characterUi in CharacterMissionProfiles)
         {
-            foreach (var characterUi in CharacterMissionProfiles)
+            var isSelected = SelectedCharacters.Contains(characterUi.CharacterBio);
+            characterUi.SetSelected(isSelected);
+
+            if (SelectedCharacters.Count == CharactersToSelect)
             {
-                var isSelected = SelectedCharacters.Contains(characterUi.CharacterBio);
-                characterUi.SelectButton.interactable = isSelected;
+                characterUi.SetLocked(!isSelected);
             }
-        }
-        else
-        {
-            foreach (var characterUi in CharacterMissionProfiles)
+            else
             {
-                characterUi.SelectButton.interactable = true;
+                characterUi.SetLocked(false);
             }
         }
     }
@@ -86,5 +94,12 @@ public class UiMission : MonoBehaviour
     {
         Debug.Log("Starting mission with characters");
         ExplorationManager.Instance.SetSelectedCharacters(SelectedCharacters.ToArray ());
+        var missionDialogue = ExplorationManager.Instance.GetMissionDialogue();
+        GameManager.Instance.LoadDialogueScene(missionDialogue, OnEndMissionDialogue);
+    }
+
+    private void OnEndMissionDialogue()
+    {
+        SceneManager.LoadScene("Camp");
     }
 }

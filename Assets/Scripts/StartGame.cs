@@ -7,7 +7,7 @@ public class StartGame : MonoBehaviour
     
     private void Start()
     {
-        if (SkipFirstDialogue)
+        if (SkipFirstDialogue || GameManager.Instance.HasFinishedOpeningDialogue)
         {
             return;
         }
@@ -17,5 +17,6 @@ public class StartGame : MonoBehaviour
     private void StartDialogue(string dialogueName)
     {
         CampManager.Instance.StartDialogue(dialogueName);
+        GameManager.Instance.SetOpeningDialogueFinished();
     }
 }

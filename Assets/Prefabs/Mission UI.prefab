@@ -100,6 +100,7 @@ MonoBehaviour:
   - {fileID: 3670220889236540626}
   - {fileID: 4042585567925986939}
   SelectXMoreText: {fileID: 1377043701851408822}
+  MissionDescription: {fileID: 5635819161922037307}
   StartMissionButton: {fileID: 2167983774251564358}
 --- !u!1 &2111833668115628924
 GameObject:

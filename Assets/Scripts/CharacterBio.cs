@@ -4,11 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Character", menuName = "ScriptableObjects/CharacterBio")]
 public class CharacterBio : ScriptableObject
 {
-    public string Name;
+    public CharacterNames Name;
     public CharacterTrait[] Traits;
     public CharacterSkills[] Skills;
     public Relationship[] Relationships;
     public Sprite ProfilePic;
+    public Sprite SelectedPic;
+    public Sprite LockedPic;
 }
 
 public enum CharacterTrait
@@ -41,4 +43,11 @@ public enum RelationshipValue
     Neutral,
     Like,
     Dislike
+}
+
+public enum CharacterNames
+{
+    Abuela,
+    Stella,
+    Lance
 }

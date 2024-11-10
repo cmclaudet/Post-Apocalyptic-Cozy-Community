@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4010959af81394043bae57ae1e0baaaf, type: 3}
   m_Name: Abuela
   m_EditorClassIdentifier: 
-  Name: Abuela
+  Name: 0
   Traits: 0000000004000000
   Skills: 01000000
   Relationships:
@@ -20,3 +20,6 @@ MonoBehaviour:
     Value: 0
   - CharacterName: Stella
     Value: 1
+  ProfilePic: {fileID: 21300000, guid: 0e0099177fe07e148b8527e9036483e0, type: 3}
+  SelectedPic: {fileID: 21300000, guid: 0f1685ba3bd91a04891eb0ea67a221bb, type: 3}
+  LockedPic: {fileID: 21300000, guid: 33728c1163b822f41ac00dce1fa073b9, type: 3}
