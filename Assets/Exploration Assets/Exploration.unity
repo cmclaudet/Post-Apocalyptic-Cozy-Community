@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1637942169569332692, guid: 4c69aa61ecafb4450ab7441dc7a3c79b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1000
+      value: 933.2
       objectReference: {fileID: 0}
     - target: {fileID: 1637942169569332692, guid: 4c69aa61ecafb4450ab7441dc7a3c79b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2039633573218150269, guid: 4c69aa61ecafb4450ab7441dc7a3c79b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 580
+      value: 546.6
       objectReference: {fileID: 0}
     - target: {fileID: 2039633573218150269, guid: 4c69aa61ecafb4450ab7441dc7a3c79b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -437,7 +437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &806536727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +720,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -750,7 +750,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -834,11 +834,11 @@ Tilemap:
   - m_RefCount: 6
     m_Data: {fileID: 21300000, guid: 4561daabea86be449856bd8e3de6fd78, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: ea32ffbab323f0e45b2104337e071cde, type: 3}
+    m_Data: {fileID: 21300000, guid: ee1298da2cebe2347acdb6e317d0e1f4, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 596e7d04ff0020446998a001b5ac4df8, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: ee1298da2cebe2347acdb6e317d0e1f4, type: 3}
+    m_Data: {fileID: 21300000, guid: ea32ffbab323f0e45b2104337e071cde, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 10
     m_Data:
@@ -1006,6 +1006,7 @@ MonoBehaviour:
   eveningColor: {r: 0.8, g: 0.5, b: 0.3, a: 0}
   nightColor: {r: 0, g: 0, b: 0.2, a: 0.5}
   heroPrefab: {fileID: 1438396785263023900, guid: 3ea9a3887157ab545a30ada0f94e9d90, type: 3}
+  missionUI: {fileID: 1472992769}
 --- !u!156049354 &1255212999
 Grid:
   m_ObjectHideFlags: 0
@@ -1034,6 +1035,11 @@ Transform:
   - {fileID: 992458205}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1472992769 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1979455419419848774, guid: 4c69aa61ecafb4450ab7441dc7a3c79b, type: 3}
+  m_PrefabInstance: {fileID: 29190858}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852073927
 GameObject:
   m_ObjectHideFlags: 0

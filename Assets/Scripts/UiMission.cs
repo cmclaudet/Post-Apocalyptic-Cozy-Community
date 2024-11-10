@@ -111,11 +111,14 @@ public class UiMission : MonoBehaviour
     private void StartMission()
     {
         // todo replace with making characters move to the forest
+        //TODO: TRigger Explorer walk 
 
         // once characters are done moving do this
         ExplorationManager.Instance.SetSelectedCharacters(SelectedCharacters.ToArray ());
-        var missionDialogue = ExplorationManager.Instance.GetMissionDialogue();
-        ExplorationManager.Instance.StartDialogue(missionDialogue, OnEndMissionDialogue);
+
+        //TODO Move this when game state changes to forrest reached 
+        //var missionDialogue = ExplorationManager.Instance.GetMissionDialogue();
+        //ExplorationManager.Instance.StartDialogue(missionDialogue, OnEndMissionDialogue);
     }
 
     private void OnEndMissionDialogue()
@@ -123,6 +126,8 @@ public class UiMission : MonoBehaviour
         // todo replace with making characters move back to camp
         
         // once characters are done moving do this
+
+        //TODO: Trigger this when characters reach camp.
         SceneManager.LoadScene("Camp");
     }
 }

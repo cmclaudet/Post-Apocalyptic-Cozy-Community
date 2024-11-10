@@ -9,6 +9,7 @@ public class ExplorerGridClicker : MonoBehaviour
     enum GameState 
     { 
         Init = 0,
+        MissionUIShown,
         OnTheWayToDestination,
         ReachedDestination,
         OnTheWayHome,
@@ -33,6 +34,8 @@ public class ExplorerGridClicker : MonoBehaviour
     public Color nightColor = new Color(0f, 0f, 0.2f, 0.5f); // Dark blue tint for night
 
     public GameObject heroPrefab;
+    public GameObject missionUI;
+
     private Vector3Int[] destinationTilePositions = new Vector3Int[] { };
     private Vector3Int[] homeTilePositions = new Vector3Int[] { };
     private Vector3Int[] heroTilePositions = new Vector3Int[] { };
@@ -195,8 +198,10 @@ public class ExplorerGridClicker : MonoBehaviour
 
                 if (fromHeroToForest && state == GameState.Init)
                 {
-                    state = GameState.OnTheWayToDestination;
-
+                    state = GameState.MissionUIShown;
+                }
+                if (state == GameState.MissionUIShown && missionUI.activeSelf == false)
+                { 
                     ShuffleArray(destinationTilePositions);
 
                     List<Vector3> destinations = new List<Vector3>();
