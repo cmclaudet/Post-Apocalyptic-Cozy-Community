@@ -88,6 +88,11 @@ public class GameManager : MonoBehaviour
         pendingMissionResult = null;
         PendingMissionCompleteDialogue = "";
     }
+
+    public bool IsGameComplete()
+    {
+        return GetCurrentMission() == Mission.None;
+    }
     //
     // public void LoadDialogueScene(string missionDialogue, Action onEnd, Sprite background = null)
     // {

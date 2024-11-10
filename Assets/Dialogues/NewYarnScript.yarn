@@ -315,7 +315,6 @@ Stella: ...
 Stella: Very well. Hand me that rope.
 
 <<setWinMission 2>>
-<<jump Mission2Success>>
 ===
 
 
@@ -333,7 +332,6 @@ Lance: Good to know. Let's get back to building the shelter, shall we?
 
 
 <<setWinMission 2>>
-<<jump Mission2Success>>
 ===
 
 

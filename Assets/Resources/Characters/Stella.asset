@@ -16,6 +16,6 @@ MonoBehaviour:
   Traits: 0300000001000000
   Skills: 0000000003000000
   Relationships: []
-  ProfilePic: {fileID: 21300000, guid: 85cfbbe2abae92a4a80302d074067287, type: 3}
-  SelectedPic: {fileID: 21300000, guid: 27d51fc400c97fa419dda478a65ed710, type: 3}
-  LockedPic: {fileID: 21300000, guid: 65217cf4e15ee7b458b3a8719b287823, type: 3}
+  ProfilePic: {fileID: 21300000, guid: 22179697c58aa2a49ab2cd7ed5d8f8b7, type: 3}
+  SelectedPic: {fileID: 21300000, guid: 2b3eab075fd05f0499bc7ab1d136cc6e, type: 3}
+  LockedPic: {fileID: 21300000, guid: 603fb1cfb383511448587074f3df22c7, type: 3}

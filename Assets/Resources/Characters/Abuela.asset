@@ -20,6 +20,6 @@ MonoBehaviour:
     Value: 0
   - CharacterName: Stella
     Value: 1
-  ProfilePic: {fileID: 21300000, guid: 0e0099177fe07e148b8527e9036483e0, type: 3}
-  SelectedPic: {fileID: 21300000, guid: 0f1685ba3bd91a04891eb0ea67a221bb, type: 3}
-  LockedPic: {fileID: 21300000, guid: 33728c1163b822f41ac00dce1fa073b9, type: 3}
+  ProfilePic: {fileID: 21300000, guid: 58822feb9a7cf17499f27b34d2e77a89, type: 3}
+  SelectedPic: {fileID: 21300000, guid: 0cd87b678b50f1f4fa201abe33b131dd, type: 3}
+  LockedPic: {fileID: 21300000, guid: 01b4b64873844694e9b3a56277ce4789, type: 3}

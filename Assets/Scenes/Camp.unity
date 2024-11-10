@@ -680,6 +680,7 @@ MonoBehaviour:
   UiCamp: {fileID: 801554915}
   DialogueRunner: {fileID: 2099858414}
   UiMissionResult: {fileID: 2036184664}
+  Shelter: {fileID: 8613444694299058849}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartDialogueName: Start
-  SkipFirstDialogue: 0
+  SkipFirstDialogue: 1
 --- !u!4 &1629759473
 Transform:
   m_ObjectHideFlags: 0
@@ -8045,6 +8046,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b877dbaa2764dc54eb45a9fa2e4d8fe2, type: 3}
+--- !u!1 &8613444694299058849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1912960374971701697, guid: b877dbaa2764dc54eb45a9fa2e4d8fe2, type: 3}
+  m_PrefabInstance: {fileID: 8613444694299058848}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

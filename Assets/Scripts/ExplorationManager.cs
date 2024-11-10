@@ -43,10 +43,7 @@ public class ExplorationManager : MonoBehaviour
     private void SetWinMission(int mission)
     {
         var completedMissionDialogue = GetCompletedMissionDialogue(success: true);
-        if (mission == 1)
-        {
-            GameManager.Instance.SetPendingDialogue(completedMissionDialogue);
-        }
+        GameManager.Instance.SetPendingDialogue(completedMissionDialogue);
         GameManager.Instance.SetMissionResult(true, mission);
     }
 
@@ -72,8 +69,13 @@ public class ExplorationManager : MonoBehaviour
 
     private string GetCompletedMissionDialogue(bool success)
     {
-        var dialogueCharacterPrefix = GetMissionDialogueCharacterPrefix();
         Mission currentMission = GameManager.Instance.GetCurrentMission();
+        if (currentMission == Mission.SetUpShelter)
+        {
+            return "Mission2Success";
+        }
+        
+        var dialogueCharacterPrefix = GetMissionDialogueCharacterPrefix();
         var missionPostfix = (int)currentMission;
         var successPostfix = success ? "Success" : "Fail";
 

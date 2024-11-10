@@ -11,6 +11,7 @@ public class CampManager : MonoBehaviour
     public GameObject UiCamp;
     public DialogueRunner DialogueRunner;
     public UiMissionResult UiMissionResult;
+    public GameObject Shelter;
 
     private void Awake()
     {
@@ -19,16 +20,32 @@ public class CampManager : MonoBehaviour
 
     private void Start()
     {
+        Shelter.gameObject.SetActive(GameManager.Instance.IsGameComplete());
         UiMissionResult.gameObject.SetActive(false);
         if (GameManager.Instance.PendingMissionCompleteDialogue != "")
         {
             UiCamp.SetActive(false);
-            GameManager.Instance.StartDialogue(GameManager.Instance.PendingMissionCompleteDialogue, DialogueRunner, ShowMissionResult);
+            if (GameManager.Instance.PendingMissionCompleteDialogue == "Mission2Complete")
+            {
+                GameManager.Instance.StartDialogue(GameManager.Instance.PendingMissionCompleteDialogue, DialogueRunner,
+                    CompleteGame);
+            }
+            else
+            {
+                GameManager.Instance.StartDialogue(GameManager.Instance.PendingMissionCompleteDialogue, DialogueRunner,
+                    ShowMissionResult);
+            }
         } else if (GameManager.Instance.pendingMissionResult != null)
         {
             UiCamp.SetActive(false);
             ShowMissionResult();
         }
+    }
+
+    private void CompleteGame()
+    {
+        UiCamp.SetActive(false);
+        Shelter.gameObject.SetActive(true);
     }
 
     private void ShowMissionResult()

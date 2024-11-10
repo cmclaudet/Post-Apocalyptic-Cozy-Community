@@ -98,7 +98,7 @@ public class UiMission : MonoBehaviour
         var finishedSelection = SelectedCharacters.Count == CharactersToSelect;
         if (finishedSelection)
         {
-            SelectXMoreText.text = $"Ready to start mission!";
+            SelectXMoreText.text = $"Ready to start!";
         }
         else
         {
