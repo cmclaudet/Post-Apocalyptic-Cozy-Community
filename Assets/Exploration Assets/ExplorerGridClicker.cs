@@ -11,7 +11,8 @@ public class ExplorerGridClicker : MonoBehaviour
         Init = 0,
         MissionUIShown,
         OnTheWayToDestination,
-        ReachedDestination,
+        ConversationShown,
+        ConversationCloset,
         OnTheWayHome,
         ReachedHome
     }
@@ -43,6 +44,8 @@ public class ExplorerGridClicker : MonoBehaviour
     private Vector3[] activeTilesWorldDestibations = new Vector3[] { };
     private GUIStyle dateTimeStyle;
 
+    private ExplorerTileInfo tileStart;
+    private ExplorerTileInfo tileEnd;
 
     public static void ShuffleArray<T>(T[] array)
     {
@@ -116,7 +119,14 @@ public class ExplorerGridClicker : MonoBehaviour
 
     void Update()
     {
+        if (state != GameState.OnTheWayHome && state != GameState.OnTheWayToDestination)
         {
+            overlayImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            overlayImage.gameObject.SetActive(true);
+
             // Cycle through a 24-hour period
             float hoursAsFloat = (float)date.TimeOfDay.TotalHours;
             float cycleDuration = 24f; // 24 hours in seconds for demonstration
@@ -150,7 +160,7 @@ public class ExplorerGridClicker : MonoBehaviour
 
                 var A = activeTileWorldDestibation - oldPosition;
                 var B = activeTileWorldDestibation - activeTile.transform.position;
-                bool overshoot = Vector3.Dot(A, B) <= 0;
+                bool overshoot = Vector3.Dot(A, B) <= 0.1f;
                 if (overshoot)
                 {
                     activeTile.transform.position = activeTileWorldDestibation;
@@ -160,8 +170,17 @@ public class ExplorerGridClicker : MonoBehaviour
 
             if (heroReachedDestination == 2)
             {
-                state = GameState.ReachedDestination;
+                if (state == GameState.OnTheWayToDestination)
+                {
+                    state = GameState.ConversationShown;
 
+                    var missionDialogue = ExplorationManager.Instance.GetMissionDialogue();
+                    ExplorationManager.Instance.StartDialogue(missionDialogue, OnEndMissionDialogue);
+                }
+                else
+                {
+                    state = GameState.ReachedHome;
+                }
             }
             return;
         }
@@ -188,7 +207,6 @@ public class ExplorerGridClicker : MonoBehaviour
         {
             if (tileInfoHold?.clickedTile != null)
             {
-
                 ExplorerTileInfo info = GetTileInfoAtMouse();
 
                 bool fromHeroToForest = tileInfoHold.IsHero&& info.IsForest;
@@ -199,80 +217,91 @@ public class ExplorerGridClicker : MonoBehaviour
                 if (fromHeroToForest && state == GameState.Init)
                 {
                     state = GameState.MissionUIShown;
+                    missionUI.SetActive(true);
+
+                    tileStart = tileInfoHold;
+                    tileEnd   = info;
                 }
-                if (state == GameState.MissionUIShown && missionUI.activeSelf == false)
-                { 
-                    ShuffleArray(destinationTilePositions);
-
-                    List<Vector3> destinations = new List<Vector3>();
-                    List<GameObject> gameObjects = new List<GameObject>();
-                    for (int i = 0; i != 2; ++i)
-                    {
-                        //var activeTile = activeTiles[i];
-                        var activeDestination = destinationTilePositions[i];
-
-                        Debug.Log($"Dragged from {tileInfoHold.clickedTile.name} to {info.clickedTile.name}");
-                        var activeTile = GameObject.Instantiate(heroPrefab);
-                        var spriteRenderer = activeTile.GetComponent<SpriteRenderer>();
-                        {
-                            //Tile tile = (Tile)tileInfoHold.clickedTile;
-                            Tile tile = (Tile)tilemap.GetTile(heroTilePositions[i]);
-                            spriteRenderer.sprite = tile.sprite;
-                            var newTile = ScriptableObject.Instantiate((Tile)tilemap.GetTile(homeTilePositions[0]));
-                            newTile.sprite = ((Tile)tilemap.GetTile(homeTilePositions[0])).sprite;
-                            tilemap.SetTile(heroTilePositions[i], newTile);
-                        }
-
-                        Vector3Int cellPosition = tileInfoHold.cellPosition;
-                        activeTile.gameObject.transform.position = GetMidpointForCell(cellPosition);
-                        //activeTile.gameObject.transform.position = grid.CellToWorld(cellPosition);
-                        //activeTileWorldDestibation = GetMidpointForCell(info.cellPosition);
-                        destinations.Add(GetMidpointForCell(activeDestination));
-                        gameObjects.Add(activeTile);
-                    }
-                    activeTilesWorldDestibations = destinations.ToArray();
-                    activeTiles = gameObjects.ToArray();
-                }
-                if (fromForestToHome && state == GameState.ReachedDestination)
-                {
-                    state = GameState.OnTheWayHome;
-
-                    FindAllTiles();
-                    ShuffleArray(homeTilePositions);
-
-                    List<GameObject> gameObjects = new List<GameObject>();
-                    for (int i = 0; i != 2; ++i)
-                    {
-                        //var activeTile = activeTiles[i];
-                        var activeDestination = homeTilePositions[i];
-
-                        Debug.Log($"Dragged from {tileInfoHold.clickedTile.name} to {info.clickedTile.name}");
-                        /*
-                        var activeTile = activeTiles[i];
-                        var spriteRenderer = activeTile.GetComponent<SpriteRenderer>();
-                        {
-                            //Tile tile = (Tile)tileInfoHold.clickedTile;
-                            Tile tile = (Tile)tilemap.GetTile(heroTilePositions[i]);
-                            spriteRenderer.sprite = tile.sprite;
-                            var newTile = ScriptableObject.Instantiate((Tile)tilemap.GetTile(homeTilePositions[0]));
-                            newTile.sprite = ((Tile)tilemap.GetTile(homeTilePositions[0])).sprite;
-                            tilemap.SetTile(heroTilePositions[i], newTile);
-                        }
-
-                        Vector3Int cellPosition = tileInfoHold.cellPosition;
-                        activeTile.gameObject.transform.position = GetMidpointForCell(cellPosition);
-                        //activeTile.gameObject.transform.position = grid.CellToWorld(cellPosition);
-                        //activeTileWorldDestibation = GetMidpointForCell(info.cellPosition);
-                        destinations.Add(GetMidpointForCell(activeDestination));
-                        gameObjects.Add(activeTile);
-                        */
-                        activeTilesWorldDestibations[i] = activeDestination;
-                    }
-                }
-
             }
             tileInfoHold = null;
+
+            if (state == GameState.MissionUIShown && missionUI.activeSelf == false)
+            {
+                state = GameState.OnTheWayToDestination;
+
+                ShuffleArray(destinationTilePositions);
+
+                List<Vector3> destinations = new List<Vector3>();
+                List<GameObject> gameObjects = new List<GameObject>();
+                for (int i = 0; i != 2; ++i)
+                {
+                    //var activeTile = activeTiles[i];
+                    var activeDestination = destinationTilePositions[i];
+
+                    //Debug.Log($"Dragged from {tileStart.clickedTile.name} to {tileEnd.clickedTile.name}");
+                    var activeTile = GameObject.Instantiate(heroPrefab);
+                    var spriteRenderer = activeTile.GetComponent<SpriteRenderer>();
+                    {
+                        //Tile tile = (Tile)tileStart.clickedTile;
+                        Tile tile = (Tile)tilemap.GetTile(heroTilePositions[i]);
+                        spriteRenderer.sprite = tile.sprite;
+                        var newTile = ScriptableObject.Instantiate((Tile)tilemap.GetTile(homeTilePositions[0]));
+                        newTile.sprite = ((Tile)tilemap.GetTile(homeTilePositions[0])).sprite;
+                        tilemap.SetTile(heroTilePositions[i], newTile);
+                    }
+
+                    Vector3Int cellPosition = tileStart.cellPosition;
+                    activeTile.gameObject.transform.position = GetMidpointForCell(cellPosition);
+                    //activeTile.gameObject.transform.position = grid.CellToWorld(cellPosition);
+                    //activeTileWorldDestibation = GetMidpointForCell(tileEnd.cellPosition);
+                    destinations.Add(GetMidpointForCell(activeDestination));
+                    gameObjects.Add(activeTile);
+                }
+                activeTilesWorldDestibations = destinations.ToArray();
+                activeTiles = gameObjects.ToArray();
+            }
+            if (state == GameState.ConversationCloset)
+            {
+                state = GameState.OnTheWayHome;
+
+                FindAllTiles();
+                ShuffleArray(homeTilePositions);
+
+                List<GameObject> gameObjects = new List<GameObject>();
+                for (int i = 0; i != 2; ++i)
+                {
+                    //var activeTile = activeTiles[i];
+                    var activeDestination = homeTilePositions[i];
+
+                    Debug.Log($"Dragged from {tileStart.clickedTile.name} to {tileEnd.clickedTile.name}");
+                    /*
+                    var activeTile = activeTiles[i];
+                    var spriteRenderer = activeTile.GetComponent<SpriteRenderer>();
+                    {
+                        //Tile tile = (Tile)tileStart.clickedTile;
+                        Tile tile = (Tile)tilemap.GetTile(heroTilePositions[i]);
+                        spriteRenderer.sprite = tile.sprite;
+                        var newTile = ScriptableObject.Instantiate((Tile)tilemap.GetTile(homeTilePositions[0]));
+                        newTile.sprite = ((Tile)tilemap.GetTile(homeTilePositions[0])).sprite;
+                        tilemap.SetTile(heroTilePositions[i], newTile);
+                    }
+
+                    Vector3Int cellPosition = tileStart.cellPosition;
+                    activeTile.gameObject.transform.position = GetMidpointForCell(cellPosition);
+                    //activeTile.gameObject.transform.position = grid.CellToWorld(cellPosition);
+                    //activeTileWorldDestibation = GetMidpointForCell(tileEnd.cellPosition);
+                    destinations.Add(GetMidpointForCell(activeDestination));
+                    gameObjects.Add(activeTile);
+                    */
+                    activeTilesWorldDestibations[i] = activeDestination;
+                }
+            }
         }
+    }
+
+    private void OnEndMissionDialogue()
+    {
+        state = GameState.ConversationCloset;
     }
 
     private Vector3 GetMidpointForCell(Vector3Int cellPosition)
